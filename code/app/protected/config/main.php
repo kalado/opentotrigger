@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Anime Trigger',
+        'theme'=>'trigger',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
