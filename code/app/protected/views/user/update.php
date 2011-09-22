@@ -1,18 +1,27 @@
-<?php
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->name=>array('view','id'=>$model->_id),
-	'Update',
-);
+<h1>Usuários</h1>
 
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->_id)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
-);
-?>
+<form id="user-form" action="<?php echo Yii::app()->request->baseUrl; ?>/index.php?r=user/update&id=<?if(isset($model)){ echo $model['_id']; }?>" method="post">
+    <fieldset>
+        <legend>Informações</legend>
 
-<h1>Update User <?php echo $model->_id; ?></h1>
+        <h2>Inputs &amp; Datepicker</h2>
+        <p>
+            <label>Login:</label>
+            <input class="sf" name="User[login]" type="text" value="<?if(isset($model)){ echo $model['login']; }?>" />
+        </p>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+        <p>
+            <label>Nome:</label>
+            <input class="sf" name="User[name]" type="text" value="<?if(isset($model)){ echo $model['name']; }?>" />
+        </p>
+
+        <p>
+            <label>Senha:</label>
+            <input class="sf" name="User[pass]" type="password" value="<?if(isset($model)){ echo $model['pass']; }?>" />
+        </p>
+
+        <p>
+            <input class="button" type="submit" value="Salvar" /> <input class="button" type="reset" value="Resetar" />
+        </p>
+    </fieldset>
+</form>

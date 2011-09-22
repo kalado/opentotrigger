@@ -210,7 +210,6 @@ h1 span {
 
 #primary_right .inner {
     clear:both;
-    float:left;
     padding:30px;
     margin-left:230px;
     position:relative;
@@ -973,4 +972,11 @@ ul.paginator li a.current {
 
 table {
     border-spacing:0;
+}
+
+
+/* CUSTOM STYLE */
+
+.controlForm {
+    
 }
