@@ -1,2 +1,3 @@
 
 code/app/assets/
+code/app/protected/views/user/_form.php
