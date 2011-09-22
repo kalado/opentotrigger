@@ -676,27 +676,3 @@ Stack trace:
 #19 /Applications/MAMP/htdocs/Open-to-Trigger/code/framework/base/CApplication.php(135): CWebApplication->processRequest()
 #20 /Applications/MAMP/htdocs/Open-to-Trigger/code/app/index.php(13): CApplication->run()
 #21 {main} REQUEST_URI=/Open-to-Trigger/code/app/index.php?r=idioma/view&id=4e7ab27e95773d9c07000000
-2011/09/22 01:17:43 [error] [exception.CException] exception 'CException' with message 'Property "Idioma.name" is not defined.' in /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/base/CComponent.php:131
-Stack trace:
-#0 /Users/kalado/Sites/animetrigger/opentotrigger/code/app/protected/extensions/YiiMongoDbSuite/EMongoEmbeddedDocument.php(170): CComponent->__get('name')
-#1 /Users/kalado/Sites/animetrigger/opentotrigger/code/app/protected/views/idioma/view.php(4): EMongoEmbeddedDocument->__get('name')
-#2 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CBaseController.php(119): require('/Users/kalado/S...')
-#3 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CBaseController.php(88): CBaseController->renderInternal('/Users/kalado/S...', Array, true)
-#4 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CController.php(833): CBaseController->renderFile('/Users/kalado/S...', Array, true)
-#5 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CController.php(746): CController->renderPartial('view', Array, true)
-#6 /Users/kalado/Sites/animetrigger/opentotrigger/code/app/protected/controllers/IdiomaController.php(56): CController->render('view', Array)
-#7 [internal function]: IdiomaController->actionView('4e7ab6e626fb55d...')
-#8 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/actions/CInlineAction.php(54): ReflectionMethod->invokeArgs(Object(IdiomaController), Array)
-#9 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CController.php(300): CInlineAction->run()
-#10 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#11 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/filters/CFilter.php(41): CFilterChain->run()
-#12 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CController.php(1084): CFilter->filter(Object(CFilterChain))
-#13 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
-#14 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#15 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CController.php(283): CFilterChain->run()
-#16 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#17 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CWebApplication.php(324): CController->run('view')
-#18 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/web/CWebApplication.php(121): CWebApplication->runController('idioma/view')
-#19 /Users/kalado/Sites/animetrigger/opentotrigger/code/framework/base/CApplication.php(135): CWebApplication->processRequest()
-#20 /Users/kalado/Sites/animetrigger/opentotrigger/code/app/index.php(13): CApplication->run()
-#21 {main} REQUEST_URI=/animetrigger/opentotrigger/code/app/index.php?r=idioma/view&id=4e7ab6e626fb55d203000000
