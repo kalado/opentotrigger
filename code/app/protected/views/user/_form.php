@@ -1,36 +1,26 @@
-<div class="form">
+<h1>Usuários</h1>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'user-form',
-	'enableAjaxValidation'=>true,
-)); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<form id="user-form" action="<?php echo Yii::app()->request->baseUrl; ?>/index.php?r=user/create" method="post">
+<fieldset>
+    <legend>Informações</legend>
 
-	<?php echo $form->errorSummary($model); ?>
+    <h2>Inputs &amp; Datepicker</h2>
+    <p>
+        <label>Login:</label>
+        <input class="sf" name="User[login]" type="text" value="<?if(isset($model)){ echo $model['login']; }?>" />
+    </p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'login'); ?>
-		<?php echo $form->textField($model,'login'); ?>
-		<?php echo $form->error($model,'login'); ?>
-	</div>
+    <p>
+        <label>Nome:</label>
+        <input class="sf" name="User[name]" type="text" value="<?if(isset($model)){ echo $model['name']; }?>" />
+    </p>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name'); ?>
-		<?php echo $form->error($model,'name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'pass'); ?>
-		<?php echo $form->textField($model,'pass'); ?>
-		<?php echo $form->error($model,'pass'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->
+    <p>
+        <label>Senha:</label>
+        <input class="sf" name="User[pass]" type="password" value="<?if(isset($model)){ echo $model['pass']; }?>" />
+    </p>
+    
+    <p><input class="button" type="submit" value="Salvar" /> <input class="button" type="reset" value="Resetar" /></p>
+</fieldset>
+</form>
