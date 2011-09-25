@@ -1,6 +1,6 @@
 <?php
 class User extends EMongoDocument
-    {
+{
       public $login;
       public $name;
       public $pass;
@@ -34,5 +34,5 @@ class User extends EMongoDocument
           'pass'   => 'Senha',
         );
       }
-    }
+}
 ?>
