@@ -34,5 +34,5 @@ class User extends EMongoDocument
           'pass'   => 'Senha',
         );
       }
-}
+} 
 ?>
