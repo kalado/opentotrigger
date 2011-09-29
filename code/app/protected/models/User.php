@@ -20,8 +20,8 @@ class User extends EMongoDocument
       public function rules()
       {
         return array(
-          array('login, pass', 'required'),
-          array('login, pass', 'length', 'max' => 20),
+          array('login, pass, name', 'required'),
+          array('login, pass', 'length', 'max' => 25),
           array('name', 'length', 'max' => 255),
         );
       }

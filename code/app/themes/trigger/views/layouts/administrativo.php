@@ -31,7 +31,7 @@
                     <div id="menu"> <!-- navigation menu -->
                         <ul>
                             <li class="current"><a href="#" class="dashboard"><img SRC="<?php echo Yii::app()->request->baseUrl; ?>/img/trigger/adm/icons/small_icons_3/dashboard.png" alt=""/><span class="current">Dashboard</span></a></li>
-                            <li><a href="#"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/trigger/adm/icons/small_icons_3/users.png" alt=""/><span>Usuarios</span></a></li>
+                            <li><a href="<?php echo Yii::app()->request->baseUrl."usuarios"; ?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/trigger/adm/icons/small_icons_3/users.png" alt=""/><span>Usuarios</span></a></li>
                             <li><a href="#"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/trigger/adm/icons/small_icons_3/posts.png" alt=""/><span>Posts</span></a></li>
                             <li><a href="#"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/trigger/adm/icons/small_icons_3/media.png" alt=""/><span>Media</span></a>
                                 <ul>
