@@ -1,16 +1,12 @@
 <?php
 class Usuario extends EMongoDocument
 {
-      public $nome;
-      public $email;
-      public $sexo;
       public $login;
+      public $nome;
       public $senha;
-      public $sexo;
-      public $dtnascimento;
-      public $created;
-      public $modified;
+      public $email;
       
+ 
       // This has to be defined in every model, this is same as with standard Yii ActiveRecord
       public static function model($className=__CLASS__)
       {
@@ -26,24 +22,19 @@ class Usuario extends EMongoDocument
       public function rules()
       {
         return array(
-          array('nome, email, login, senha, sexo, dtnascimento', 'required'),
-          array('dtnascimento', 'format' => 'dd/MM/yyyy' , 'message' => 'Data invalida'),
-          array('login, senha', 'length', 'max' => 25 , 'tooLong' => "Esse campo deve conter, no maximo, 25 caracteres" , 'min' => 4 , 'tooShort'=>'Esse campo deve conter, no minimo, 4 caracteres'),
-          array('nome', 'length', 'max' => 255, 'tooLong' => "Esse campo deve conter, no maximo, 255 caracteres" , 'min' => 4 , 'tooShort'=>'Esse campo deve conter, no minimo, 4 caracteres'),
+          array('login, senha, nome, email', 'required'),
+          array('login, senha', 'length', 'max' => 25),
+          array('nome, email', 'length', 'max' => 255),
         );
       }
  
       public function attributeLabels()
       {
         return array(
-            'nome' => 'Nome Completo',
-            'email' => 'E-mail',
-            'sexo' => 'Sexo',
-            'login' => 'Nick Name',
-            'senha' => 'Senha',
-            'dtnascimento' => 'Data de Nascimento',
-            'created' => 'Criado',
-            'modified' => 'Modificado'
+          'login'  => 'Login',
+          'nome'   => 'Nome Completo',
+          'senha'  => 'Senha',
+          'email'  => 'E-mail',
         );
       }
 } 

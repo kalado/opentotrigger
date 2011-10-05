@@ -8,12 +8,12 @@
 	<?php echo CHtml::encode($data->login); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-	<?php echo CHtml::encode($data->name); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('nome')); ?>:</b>
+	<?php echo CHtml::encode($data->nome); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('pass')); ?>:</b>
-	<?php echo CHtml::encode($data->pass); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('senha')); ?>:</b>
+	<?php echo CHtml::encode($data->senha); ?>
 	<br />
 
 

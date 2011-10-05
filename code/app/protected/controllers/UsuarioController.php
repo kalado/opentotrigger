@@ -23,23 +23,23 @@ class UsuarioController extends Controller
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
+	public function CAccessRules()
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'usuarios'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'usuarios'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'usuarios'=>array('admin'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'usuarios'=>array('*'),
 			),
 		);
 	}
@@ -49,7 +49,7 @@ class UsuarioController extends Controller
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{
+	{     
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -61,14 +61,13 @@ class UsuarioController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new User;
+		$model=new Usuario;
+                        // Uncomment the following line if AJAX validation is needed
+		//$this->performAjaxValidation($model);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['User']))
+		if(isset($_POST['Usuario']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['Usuario'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->_id));
 		}
@@ -90,9 +89,9 @@ class UsuarioController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['Usuario']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['Usuario'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->_id));
 		}
@@ -127,7 +126,7 @@ class UsuarioController extends Controller
 	 */
 	public function actionIndex()
 	{
-                  	$dataProvider=new EMongoDocumentDataProvider('User');
+                  	$dataProvider=new EMongoDocumentDataProvider('Usuario');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -141,8 +140,8 @@ class UsuarioController extends Controller
 		$model = new User('search');
 		$model->unsetAttributes();
 
-		if(isset($_GET['User']))
-			$model->setAttributes($_GET['User']);
+		if(isset($_GET['Usuario']))
+			$model->setAttributes($_GET['Usuario']);
                 
 		$this->render('admin', array(
 			'model'=>$model

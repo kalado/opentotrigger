@@ -1,6 +1,6 @@
 <h1>Usuários</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php //echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 
 <form id="user-form" action="<?php echo Yii::app()->request->baseUrl; ?>/index.php?r=user/create" method="post">
