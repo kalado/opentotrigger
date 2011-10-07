@@ -4,3 +4,5 @@ code/app/protected/views/user/_form.php
 /code/nbproject/private/private.properties
 /code/nbproject/project.properties
 /code/nbproject/project.xml
+
+code/app/protected/runtime/application.log
