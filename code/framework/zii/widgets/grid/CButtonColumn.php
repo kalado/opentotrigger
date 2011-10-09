@@ -29,15 +29,15 @@ class CButtonColumn extends CGridColumn
 	/**
 	 * @var array the HTML options for the data cell tags.
 	 */
-	public $htmlOptions=array('class'=>'button-column');
+	public $htmlOptions=array('class'=>'');
 	/**
 	 * @var array the HTML options for the header cell tag.
 	 */
-	public $headerHtmlOptions=array('class'=>'button-column');
+	public $headerHtmlOptions=array('class'=>'');
 	/**
 	 * @var array the HTML options for the footer cell tag.
 	 */
-	public $footerHtmlOptions=array('class'=>'button-column');
+	public $footerHtmlOptions=array('class'=>'');
 	/**
 	 * @var string the template that is used to render the content in each data cell.
 	 * These default tokens are recognized: {view}, {update} and {delete}. If the {@link buttons} property
@@ -65,7 +65,7 @@ class CButtonColumn extends CGridColumn
 	/**
 	 * @var array the HTML options for the view button tag.
 	 */
-	public $viewButtonOptions=array('class'=>'view');
+	public $viewButtonOptions=array('class'=>'tooltip table_icon');
 
 	/**
 	 * @var string the label for the update button. Defaults to "Update".
@@ -87,7 +87,7 @@ class CButtonColumn extends CGridColumn
 	/**
 	 * @var array the HTML options for the update button tag.
 	 */
-	public $updateButtonOptions=array('class'=>'update');
+	public $updateButtonOptions=array('class'=>'tooltip table_icon');
 
 	/**
 	 * @var string the label for the delete button. Defaults to "Delete".
@@ -109,7 +109,7 @@ class CButtonColumn extends CGridColumn
 	/**
 	 * @var array the HTML options for the view button tag.
 	 */
-	public $deleteButtonOptions=array('class'=>'delete');
+	public $deleteButtonOptions=array('class'=>'tooltip table_icon');
 	/**
 	 * @var string the confirmation message to be displayed when delete button is clicked.
 	 * By setting this property to be false, no confirmation message will be displayed.
@@ -167,11 +167,11 @@ class CButtonColumn extends CGridColumn
 	protected function initDefaultButtons()
 	{
 		if($this->viewButtonLabel===null)
-			$this->viewButtonLabel=Yii::t('zii','View');
+			$this->viewButtonLabel=Yii::t('zii','Visualizar');
 		if($this->updateButtonLabel===null)
-			$this->updateButtonLabel=Yii::t('zii','Update');
+			$this->updateButtonLabel=Yii::t('zii','Atualizar');
 		if($this->deleteButtonLabel===null)
-			$this->deleteButtonLabel=Yii::t('zii','Delete');
+			$this->deleteButtonLabel=Yii::t('zii','Deletar');
 		if($this->viewButtonImageUrl===null)
 			$this->viewButtonImageUrl=$this->grid->baseScriptUrl.'/view.png';
 		if($this->updateButtonImageUrl===null)
@@ -179,7 +179,7 @@ class CButtonColumn extends CGridColumn
 		if($this->deleteButtonImageUrl===null)
 			$this->deleteButtonImageUrl=$this->grid->baseScriptUrl.'/delete.png';
 		if($this->deleteConfirmation===null)
-			$this->deleteConfirmation=Yii::t('zii','Are you sure you want to delete this item?');
+			$this->deleteConfirmation=Yii::t('zii','Você tem certeza que deseja deletar este item?');
 
 		foreach(array('view','update','delete') as $id)
 		{
