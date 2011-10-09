@@ -109,7 +109,7 @@ class CButtonColumn extends CGridColumn
 	/**
 	 * @var array the HTML options for the view button tag.
 	 */
-	public $deleteButtonOptions=array('class'=>'tooltip table_icon');
+	public $deleteButtonOptions=array('class'=>'tooltip table_icon_delete');
 	/**
 	 * @var string the confirmation message to be displayed when delete button is clicked.
 	 * By setting this property to be false, no confirmation message will be displayed.
