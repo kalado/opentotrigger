@@ -1,0 +1,12 @@
+['Source','NewPage'],
+['Cut','Copy','Paste','PasteText','PasteFromWord'],
+['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+['Image','YouTube','Flash','Table','HorizontalRule','SpecialChar','PageBreak'],
+'/',
+['Styles','Format'],
+['Bold','Italic','Underline','Strike'],
+['NumberedList','BulletedList','-','Outdent','Indent'],
+['Link','Unlink','Anchor'],
+['TextColor','BGColor'],
+['Maximize']
