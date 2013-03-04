@@ -41,13 +41,13 @@ class Serie extends AppModel{
     
     
     public function getAutores($id){
-        $qualidades = $this->query(
+        $autores = $this->query(
                     'SELECT * FROM autoria_serie AS Autores '.
                         'WHERE '.
                             'Autores.series_id='.$id.
                         ' ;');
         
-        return $qualidades;
+        return $autores;
     }
     
     
