@@ -62,7 +62,7 @@ class PaginatorGenHelper extends AppHelper{
                 }else{
                     $campo = explode(".", $campo);
                     $linha[$label]=  $this->Html->link($cont, '/'.$campo[0].'/edit/'.$dados[$campo[0]][$campo[1]]);
-                    $delete_link =  '<a href="'.$this->Html->url('/'.$campo[0].'/delete/'.$dados[$campo[0]][$campo[1]]).'" class="btn btn-danger" ><i class="icon-trash"></i></a>';
+                    $delete_link =  '<a href="'.$this->Html->url('/'.$campo[0].'/delete/'.$dados[$campo[0]][$campo[1]]).'" class="btn btn-danger delete" ><i class="icon-trash"></i></a>';
                 }
             }
             $linha[] = $delete_link;
