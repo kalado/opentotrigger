@@ -105,21 +105,7 @@ class AppController extends Controller {
         
                                             // legenda
                                             // controller | nome
-        $this->set( 'all_pages_menus' , array(
-                                                'Series',
-                                                'serie'=>'Series',
-            
-                                                'Dados Tecnicos',
-                                                'autor'=>'Autores',
-                                                'fansub'=>'Fansubs',
-            
-                                                'Configurações',
-                                                'servidor' => 'Servidores',
-                                                'status' => 'Status',
-                                                'multimidia'=>'Multimidias',
-                                                'idioma'=>'Idiomas',
-                                                'qualidade'=>'Qualidades',
-                                            ));
+        $this->set( 'all_pages_menus' , $this->Menus->MenuEsquerdaADMIN());
         $this->set( 'current_page' , $this->request->params['controller']);
                 
     }

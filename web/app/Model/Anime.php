@@ -67,8 +67,7 @@ class Anime extends AppModel{
         
     }
     
-    
-    public function getAutores($id){
+        public function getAutores($id){
         $qualidades = $this->query(
                     'SELECT * FROM autoria_anime AS Autores '.
                         'WHERE '.
