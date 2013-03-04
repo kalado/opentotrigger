@@ -31,7 +31,7 @@ class MultimidiaController extends AppController{
             }else{
                 $qualidades_compativeis = array();
             }
-            $this->request->data['Multimidia']['formatos_aceitos'] = $qualidades_compativeis;
+            $this->request->data['Multimidia']['formatos_aceitos'] = array_map('intval', $qualidades_compativeis);
         }
         if($id!=NULL)$this->page_title = $this->Multimidia->getField($id,'nome');
         $fildset = (($id==NULL)?"Nova Multimidia":"Editar Multimidia");
