@@ -3,9 +3,13 @@ class Anime extends AppModel{
     var $name = "Anime";
     
     var $hasAndBelongsToMany = array(
-       'Criado' => array(
+        'Criado' => array(
             'className' => 'Autor',
             'joinTable' => 'autoria_anime',
+        ),
+        'Fansubs' => array(
+            'className' => 'Fansub',
+            'joinTable' => 'fansub_animes',
         )
     );
     
@@ -28,9 +32,6 @@ class Anime extends AppModel{
         'Status' => array(
             'className' => 'Status',
         ),
-        'Fansub' => array(
-            'className' => 'Fansub',
-        )
     );
     
     

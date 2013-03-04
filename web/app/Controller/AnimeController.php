@@ -4,11 +4,7 @@ class AnimeController extends AppController{
     /**
      * Adiciona ou Edita uma nova anime
      */
-    
-    
-
-
-    private function save($id=NULL){
+    private function save($id=NULL,$id_serie=NULL){
         if(!empty($this->request->data)){
             $save = $this->Anime->save($this->request->data);
             if($save!==FALSE){
@@ -20,8 +16,8 @@ class AnimeController extends AppController{
                 $id = ((empty($id))?$this->request->data['Anime']['id']:$id); 
                 $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
             }else{
-                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o anime, favor conferir os dados e tentar novamente!", 'alert', array(
-                    'plugin' => 'TwitterBootstrap',
+                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o anime, favor conferir os dados e tentar novamente!", "alert", array(
+                    "plugin" => "TwitterBootstrap",
                     'class' => 'alert-error'
                 ));
             }
@@ -43,10 +39,18 @@ class AnimeController extends AppController{
         $campos = array(
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
+                    'serie_id' => array('type'=>'hidden','value'=>$id_serie),
+                    
                     'nome' => array('required'=>TRUE , 'class'=>'input-block-level'),
+                    'apelido' => array('class'=>'input-block-level'),
                     'sinopse' => array('type'=>'textarea-editor'),
-                    'status_id' => array('label'=>'Status','type'=>'select','options'=>$this->Status->getArraySimples('nome'),'class'=>'input-block-level'),
+                    ),
+                'Detalhes técnicos' => array(
+                    'status_id' => array('label'=>'Status','type'=>'select','options'=>$this->Status->getArraySimples('nome')),
                     'autores' => array('label'=>'Autores' , 'type'=>'checkbox-inline', 'options' => $this->Autor->getArraySimples('nome')),
+                    'fansubs' => array('label'=>'Fansub' , 'type'=>'checkbox-inline', 'options' => $this->Fansub->getArraySimples('sigla')),
+                    'multimidia_id' => array('label'=>'Multimidia','type'=>'select','options'=>$this->Multimidia->getArraySimples('nome')),
+                    'idioma_id' => array('label'=>'Idioma','type'=>'select','options'=>$this->Idioma->getArraySimples('nome')),
                 )
             );
         
@@ -58,9 +62,9 @@ class AnimeController extends AppController{
                     );
     }
     
-    public function novo(){
+    public function novo($id_serie){
         $this->beforeAdmin();
-        $this->save();
+        $this->save(NULL,$id_serie);
         $this->render('save');
     }
     
