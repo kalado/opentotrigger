@@ -5,44 +5,6 @@ class SerieController extends AppController{
      * Adiciona ou Edita uma nova serie
      */
     
-    private function gerarMenuSerieADMIN($id){
-        
-        $animes = $this->Anime->find('all',array('conditions'=>array('Anime.serie_id'=>$id)));
-        
-        /*
-         Ainda tenho que pensar na forma de ordenação
-         quem saber exibir
-         
-         (Multimida)Nome do Anime
-         
-         
-         */
-        
-        
-        // -anime 1 (id - nome_unidade)
-        // -anime 2
-        // -anime 3
-        // -manga 1
-        // -manga 2
-        // -OVA 1
-        // -filme 1
-        // -filme 2
-        // -filme 3
-        // -filme 4
-        
-        
-        $serie = $this->Serie->getField($id,'nome');
-        $this->set(
-                array(
-                        "serie_nome"=>$serie,
-                        "serie_id"=>$id,
-                        "menu_da_serie" => array(),
-                    )
-                );
-        
-    }
-
-
     private function save($id=NULL){
         if(!empty($this->request->data)){
             $save = $this->Serie->save($this->request->data);
@@ -71,7 +33,7 @@ class SerieController extends AppController{
                 $autores = array();
             }
             $this->request->data['Serie']['autores'] = array_map("intval", $autores);
-            $this->gerarMenuSerieADMIN($id);
+            $this->set($this->Menus->MenuSerieADMIN($id));
         }
         if($id!=NULL)$this->page_title = $this->Serie->getField($id,'nome');
         $fildset = (($id==NULL)?"Nova Serie":"Editar Serie");

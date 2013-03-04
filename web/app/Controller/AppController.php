@@ -56,6 +56,7 @@ class AppController extends Controller {
                         'RequestHandler',
                         'Email',
                         'Paginator',
+                        'Menus',
                         );
 
 
@@ -197,6 +198,8 @@ class AppController extends Controller {
     private function getPermissaoUsuarioLogado(){
         
     }
+    
+    
     
     
 }
