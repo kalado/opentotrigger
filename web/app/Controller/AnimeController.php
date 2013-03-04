@@ -23,24 +23,54 @@ class AnimeController extends AppController{
             }
         }
         if($id != ""){
-            $this->request->data = $this->Anime->find('first',array('conditions' => array($this->name.'.id' => $id) , 'fields'=>array('id','nome','sinopse','status_id')));
-            if(!empty ($this->request->data['Autoria'])){
-                foreach ( $this->request->data['Autoria'] as $autor){
+            $this->request->data = $this->Anime->find('first',array('conditions' => array($this->name.'.id' => $id)));
+            
+            if(!empty ($this->request->data['Criado'])){
+                foreach ( $this->request->data['Criado'] as $autor){
                     $autores[] = $autor['id'];
                 }
             }else{
                 $autores = array();
             }
-            $this->request->data['Anime']['autores'] = $autores;
-            $this->gerarMenuAnimeADMIN($id);
+            $this->request->data['Anime']['autores'] =  array_map("intval", $autores);
+            
+            
+            if(!empty ($this->request->data['Fansubs'])){
+                foreach ( $this->request->data['Fansubs'] as $fansub){
+                    $fansubs[] = $fansub['id'];
+                }
+            }else{
+                $fansubs = array();
+            }
+            $this->request->data['Anime']['fansubs'] =  array_map("intval", $fansubs);
+                        
         }
-        if($id!=NULL)$this->page_title = $this->Anime->getField($id,'nome');
-        $fildset = (($id==NULL)?"Nova Anime":"Editar Anime");
+        if($id!=NULL){
+            $this->page_title = $this->Anime->getField($id,'nome');
+        }else{
+            /**
+             * Nesse caso (um novo anime) os autores vem como os mesmos da série (pode ser mudado)
+             **/
+            /*
+             * No caso de um anime novo, o editor vem com os autores padrões da série
+             */
+            $autores = $this->Serie->getAutores($id_serie);
+            if(!empty($autores) ){
+                foreach ( $autores as $autor){
+                    $autores[] = $autor['Autores']['autor_id'];
+                }
+            }else{
+                $autores = array();
+            }
+            $this->request->data['Anime']['autores'] =  array_map("intval", $autores);
+        }
+        $fildset = (($id==NULL)?"Novo Material":"Editar");
         $campos = array(
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
                     'serie_id' => array('type'=>'hidden','value'=>$id_serie),
                     
+                    'multimidia_id' => array('label'=>'Multimidia','type'=>'select','options'=>$this->Multimidia->getArraySimples('nome'),'class'=>'input-block-level'),
                     'nome' => array('required'=>TRUE , 'class'=>'input-block-level'),
                     'apelido' => array('class'=>'input-block-level'),
                     'sinopse' => array('type'=>'textarea-editor'),
@@ -48,8 +78,7 @@ class AnimeController extends AppController{
                 'Detalhes técnicos' => array(
                     'status_id' => array('label'=>'Status','type'=>'select','options'=>$this->Status->getArraySimples('nome')),
                     'autores' => array('label'=>'Autores' , 'type'=>'checkbox-inline', 'options' => $this->Autor->getArraySimples('nome')),
-                    'fansubs' => array('label'=>'Fansub' , 'type'=>'checkbox-inline', 'options' => $this->Fansub->getArraySimples('sigla')),
-                    'multimidia_id' => array('label'=>'Multimidia','type'=>'select','options'=>$this->Multimidia->getArraySimples('nome')),
+                    'fansubs' => array('label'=>'Fansubs' , 'type'=>'checkbox-inline', 'options' => $this->Fansub->getArraySimples('sigla')),
                     'idioma_id' => array('label'=>'Idioma','type'=>'select','options'=>$this->Idioma->getArraySimples('nome')),
                 )
             );
@@ -60,6 +89,10 @@ class AnimeController extends AppController{
                                 'campos' => $campos,
                             )
                     );
+            
+            $this->set($this->Menus->MenuSerieADMIN($id_serie));
+
+            
     }
     
     public function novo($id_serie){
@@ -71,7 +104,7 @@ class AnimeController extends AppController{
     
     public function edit($id){
         $this->beforeAdmin();
-        $this->save($id);
+        $this->save($id,$this->Anime->getField($id,'serie_id'));
         $this->render('save');
     }
     
