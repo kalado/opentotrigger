@@ -14,15 +14,19 @@ class MenusComponent extends Component {
         $this->ModelRegistre('Anime');
         $this->ModelRegistre('Serie');
 
-        $animes = $this->Anime->find('all', array('conditions' => array('Anime.serie_id' => $serie_id)));
-
+        $animes = $this->Anime->find('all', array('conditions' => array('Anime.serie_id' => $serie_id) ,'order'=>array('Multimidia.nome','Anime.nome')));
+        
+        foreach($animes as $anime){
+            $animes_menu[] = array($anime['Anime']['nome'] => array('id'=>$anime['Anime']['id'],'nome_unidade'=>$anime['Multimidia']['unidade']) );
+        }
+        
+        print_r($animes_menu);exit;
+        
         /*
           Ainda tenho que pensar na forma de ordenação
           quem saber exibir
 
           (Multimida)Nome do Anime
-
-
          */
 
 
