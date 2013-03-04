@@ -3,12 +3,14 @@ class Fansub extends AppModel{
     var $name = "Fansub";
     var $useTable = 'fansub';
     
-    var $hasMany = array(
-        'Capitulos' => array(
-            'className' => 'Capitulo',
-        ),
-    );
     
+//    
+//    var $hasMany = array(
+//        'Capitulo' => array(
+//            'className' => 'Capitulo',
+//        ),
+//    );
+//    
     
     var $validate = array(
         'nome' => array(

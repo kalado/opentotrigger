@@ -85,6 +85,7 @@ class AppModel extends Model{
             $this->voltarLigacoes();
         }else{
         }
+        
         foreach($resource as $value){
                 $resutado[$value[$this->name][$indice]] = $value[$this->name][$label];
             }

@@ -5,7 +5,11 @@ class Capitulo extends AppModel{
     var $belongsTo = array(
         'Anime' => array(
             'className' => 'Anime',
-        )
+        ),
+//        'Fansub' => array(
+//            'className' => 'Fansub',
+//        ),
+//        
     );
     
 }

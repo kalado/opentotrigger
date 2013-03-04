@@ -9,6 +9,12 @@ class Anime extends AppModel{
         )
     );
     
+    var $hasMany = array(
+        'Capitulos' => array(
+            'className' => 'Capitulo',
+        ),
+    );
+    
     var $belongsTo = array(
         'Serie' => array(
             'className' => 'Serie',

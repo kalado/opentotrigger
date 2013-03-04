@@ -70,7 +70,7 @@ class SerieController extends AppController{
             }else{
                 $autores = array();
             }
-            $this->request->data['Serie']['autores'] = $autores;
+            $this->request->data['Serie']['autores'] = array_map("intval", $autores);
             $this->gerarMenuSerieADMIN($id);
         }
         if($id!=NULL)$this->page_title = $this->Serie->getField($id,'nome');
