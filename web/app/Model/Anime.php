@@ -50,6 +50,21 @@ class Anime extends AppModel{
                         'VALUES '.
                             implode(",", $valores).
                         ' ;');
+        
+        
+        foreach($this->data[$this->name]['fansubs'] as $fansub){
+            $fansubs[] = '('.$fansub.','.$id.')';
+        }
+        $this->query(
+                    'DELETE FROM fansub_animes '.
+                        'WHERE anime_id='.$id.
+                    ';'.
+                    'INSERT INTO fansub_animes '.
+                        'VALUES '.
+                            implode(",", $fansubs).
+                        ' ;');
+        
+        
     }
     
     
