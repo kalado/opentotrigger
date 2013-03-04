@@ -28,7 +28,7 @@ class ServidorController extends AppController{
         if($id != ""){
             $this->request->data = $this->Servidor->find('first',array('conditions' => array('id' => $id) , 'fields'=>array('id','nome','habilitado','usuario','senha')));
         }
-        if($id==NULL)$this->page_title = $this->Servidor->getField($id,'nome');
+        if($id!=NULL)$this->page_title = $this->Servidor->getField($id,'nome');
         $fildset = (($id==NULL)?"Novo Servidor":"Editar servidor");
         $campos = array(
                 $fildset => array(

@@ -39,6 +39,7 @@ class AppController extends Controller {
     var $uses = array(
                         'Anime',
                         'Autor',
+                        'Capitulo',
                         'Fansub',
                         'Idioma',
                         'Multimidia',

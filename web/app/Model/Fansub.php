@@ -4,8 +4,8 @@ class Fansub extends AppModel{
     var $useTable = 'fansub';
     
     var $hasMany = array(
-        'Captulos' => array(
-            'className' => 'Captulo',
+        'Capitulos' => array(
+            'className' => 'Capitulo',
         ),
     );
     

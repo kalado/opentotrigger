@@ -41,7 +41,7 @@ class IdiomaController extends AppController{
         
             $this->set(
                         array(
-                            'model' => 'Serie',
+                            'model' => 'Idioma',
                             'campos' => $campos
                             )
                     );

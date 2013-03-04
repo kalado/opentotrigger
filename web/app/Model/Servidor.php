@@ -14,11 +14,6 @@ class Servidor extends AppModel{
                 'rule' => 'notEmpty',
                 'message' => 'O Nome não pode ficar em Branco',
             ),
-            'alphaNumeric'=>array(
-                'rule' => 'alphaNumeric',
-                'message' => 'Apenas números ou letras são permitidos',
-            ),
-            'required'=>TRUE
         )
         
     );

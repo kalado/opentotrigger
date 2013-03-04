@@ -1,6 +1,6 @@
 <?php
 class Capitulo extends AppModel{
-    var $name = "Captulo";
+    var $name = "Capitulo";
     
     var $belongsTo = array(
         'Anime' => array(

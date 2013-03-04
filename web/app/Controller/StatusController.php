@@ -27,7 +27,7 @@ class StatusController extends AppController{
         if($id != ""){
             $this->request->data = $this->Status->find('first',array('conditions' => array('id' => $id) , 'fields'=>array('id','nome')));
         }
-        if($id==NULL)$this->page_title = $this->Status->getField($id,'nome');
+        if($id!=NULL)$this->page_title = $this->Status->getField($id,'nome');
         $fildset = (($id==NULL)?"Novo status":"Editar status");
         $campos = array(
                 $fildset => array(
