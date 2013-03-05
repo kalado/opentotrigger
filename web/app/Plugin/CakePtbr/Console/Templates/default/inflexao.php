@@ -23,7 +23,7 @@ class Inflexao {
  * @return string Palavra com acento
  * @access public
  */
-	function acentos($palavra) {
+	public function acentos($palavra) {
 		$espacamentos = array(' ', '_');
 		foreach ($espacamentos as $espacamento) {
 			if (strpos($palavra, $espacamento) !== false) {
