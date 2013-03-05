@@ -23,7 +23,7 @@ class AjusteDataBehavior extends ModelBehavior {
  * @var array
  * @access public
  */
-	public $campos;
+	var $campos;
 
 /**
  * Setup
@@ -33,7 +33,7 @@ class AjusteDataBehavior extends ModelBehavior {
  * @return void
  * @access public
  */
-	public function setup(Model $model, $config = array()) {
+	function setup(&$model, $config = array()) {
 		if (empty($config)) {
 			// Caso não seja informado os campos, ele irá buscar no schema
 			$this->campos[$model->name] = $this->_buscaCamposDate($model);
@@ -51,7 +51,7 @@ class AjusteDataBehavior extends ModelBehavior {
  * @return boolean
  * @access public
  */
-	public function beforeValidate(Model $model) {
+	function beforeValidate(&$model) {
 		return $this->ajustarDatas($model);
 	}
 
@@ -62,7 +62,7 @@ class AjusteDataBehavior extends ModelBehavior {
  * @return boolean
  * @access public
  */
-	public function beforeSave(Model $model) {
+	function beforeSave(&$model) {
 		return $this->ajustarDatas($model);
 	}
 
@@ -73,7 +73,7 @@ class AjusteDataBehavior extends ModelBehavior {
  * @return boolean
  * @access public
  */
-	public function ajustarDatas(Model $model) {
+	function ajustarDatas(&$model) {
 		$data =& $model->data[$model->name];
 		foreach ($this->campos[$model->name] as $campo) {
 			if (isset($data[$campo]) && preg_match('/\d{1,2}\/\d{1,2}\/\d{2,4}/', $data[$campo])) {
@@ -98,13 +98,12 @@ class AjusteDataBehavior extends ModelBehavior {
  * @return array Lista dos campos
  * @access protected
  */
-	public function _buscaCamposDate(Model &$model) {
-		$schema = $model->schema();
-		if (!is_array($schema)) {
+	function _buscaCamposDate(&$model) {
+		if (!is_array($model->_schema)) {
 			return array();
 		}
 		$saida = array();
-		foreach ($schema as $campo => $infos) {
+		foreach ($model->_schema as $campo => $infos) {
 			if ($infos['type'] == 'date' && !in_array($campo, array('created', 'updated', 'modified'))) {
 				$saida[] = $campo;
 			}

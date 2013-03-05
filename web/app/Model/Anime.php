@@ -35,11 +35,6 @@ class Anime extends AppModel{
     );
     
     
-    public function beforeSave ($options=array()){
-        print_r($this->data[$this->name]['lancamento']);
-        
-    }
-    
     public function afterSave( $created ){
         $id = $this->getInsertID();
         if(empty($id))$id=$this->data[$this->name]['id'];
