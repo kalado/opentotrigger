@@ -29,18 +29,21 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         echo $this->Html->meta('icon');
 
         echo $this->Html->css(array(
-            //'cake.generic',
-            'bootstrap',
-            'bootstrap-responsive',
-            'basicos',
-            'default',)
+                //'cake.generic',
+                'bootstrap',
+                'bootstrap-responsive',
+                'datepicker',
+                'basicos',
+                'default',
+            )
         );
         echo $this->Html->script(array(
-            'jQuery',
-            'jQuery.ui',
-            'jAdmin',
-            'bootstrap',
-                )
+                'jQuery',
+                'jQuery.ui',
+                'jAdmin',
+                'bootstrap',
+                'bootstrap-datepicker',
+            )
         );
 
 
