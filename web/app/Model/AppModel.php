@@ -34,6 +34,18 @@ class AppModel extends Model{
     
     var $ligacoes;
     
+    var $dataFields = array();
+    
+    public function beforeSave($options = array()){
+        parent::beforeSave($options);
+        
+        $campos = $this->dataFields;
+        foreach( $campos as $campo){
+            if(isset($this->data[$this->name][$campo])){
+            $this->data[$this->name][$campo] = $this->tratarData($this->data[$this->name][$campo]);
+            }
+        }
+    }
     
     
     private function removerLigacoes(){
@@ -94,5 +106,33 @@ class AppModel extends Model{
         return $resutado;
     }
     
+    public function inverterdata($data){
+        if(empty($data))
+            return $data;
+        if(!eregi(" ", $data)){
+            if(eregi("-", $data)){
+                $data = explode("-", $data);
+                $data = $data[2]."/".$data[1]."/".$data[0];
+            }else{
+                $data = explode("/", $data);
+                $data = $data[2]."-".$data[1]."-".$data[0];
+            }
+            return $data;
+        }else{
+            if(eregi(" - ", $data)){
+                $caractere = " - ";
+                $oposto = " ";
+            }else{
+                $caractere = " ";
+                $oposto = " - ";
+            }
+            $data = explode($caractere, $data);
+            return $this->inverterdata($data[0]).$oposto.$data[1];
+        }
+    }
+    
+    public function tratarData($data){
+        return $this->inverterdata($data);
+    }
     
 }

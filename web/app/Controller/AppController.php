@@ -79,6 +79,7 @@ class AppController extends Controller {
     
     var $page_title = '';
     
+    
     /**
      * 
      * Funções a serem herdadas:
@@ -187,5 +188,38 @@ class AppController extends Controller {
     
     
     
+    /**
+     * 
+     * Função de ajuda
+     * 
+     **/
+    public function inverterdata($data){
+        if(empty($data))
+            return $data;
+        if(!eregi(" ", $data)){
+            if(eregi("-", $data)){
+                $data = explode("-", $data);
+                $data = $data[2]."/".$data[1]."/".$data[0];
+            }else{
+                $data = explode("/", $data);
+                $data = $data[2]."-".$data[1]."-".$data[0];
+            }
+            return $data;
+        }else{
+            if(eregi(" - ", $data)){
+                $caractere = " - ";
+                $oposto = " ";
+            }else{
+                $caractere = " ";
+                $oposto = " - ";
+            }
+            $data = explode($caractere, $data);
+            return $this->inverterdata($data[0]).$oposto.$data[1];
+        }
+    }
+    
+    public function tratarData($data){
+        return $this->inverterdata($data);
+    }
     
 }
