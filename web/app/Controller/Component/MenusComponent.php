@@ -20,7 +20,7 @@ class MenusComponent extends Component {
             $animes_menu[] = array($anime['Anime']['nome'] => array('id'=>$anime['Anime']['id'],'nome_unidade'=>$anime['Multimidia']['unidade']) );
         }
         
-        //print_r($animes_menu);exit;
+        print_r($animes_menu);exit;
         
         /*
           Ainda tenho que pensar na forma de ordenação
