@@ -76,6 +76,7 @@ class AnimeController extends AppController{
                     'sinopse' => array('type'=>'textarea-editor'),
                     ),
                 'Detalhes técnicos' => array(
+                    'lancamento' => array('label'=>'Lançamento','class'=>'datePiker'),
                     'status_id' => array('label'=>'Status','type'=>'select','options'=>$this->Status->getArraySimples('nome')),
                     'autores' => array('label'=>'Autores' , 'type'=>'checkbox-inline', 'options' => $this->Autor->getArraySimples('nome')),
                     'fansubs' => array('label'=>'Fansubs' , 'type'=>'checkbox-inline', 'options' => $this->Fansub->getArraySimples('sigla')),

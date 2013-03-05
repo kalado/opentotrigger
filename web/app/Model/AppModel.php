@@ -34,6 +34,8 @@ class AppModel extends Model{
     
     var $ligacoes;
     
+    
+    
     private function removerLigacoes(){
         $this->ligacoes['hasMany'] = $this->hasMany;
         $this->ligacoes['hasAndBelongsToMany'] = $this->hasAndBelongsToMany;
