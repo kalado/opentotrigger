@@ -81,32 +81,9 @@ class CapituloController extends AppController{
         $this->beforeAdmin();
         $this->save($id);
         
+        $this->setLinkForm($id,$this->Capitulo->getfield($id,'anime_id'));
         
-        $capitulos = $this->Capitulo->find('first',array('conditions' => array($this->name.'.id' => $id), 'recursive' => 3));
-        $qualidades_aceitas = $capitulos['Anime']['Multimidia']['Qualidades'];
-        
-        $qualidades_aceitas_options = array();
-        foreach($qualidades_aceitas as $qualidade){
-            $qualidades_aceitas_options[$qualidade['id']]=$qualidade['sigla'];
-        }
-        
-        $campos = array(
-            'Novo Link' => array(
-                'capitulo_id' => array('type'=>'hidden','value'=>$id),
-                'url' => array('required'=>TRUE),
-                'servidor_id' => array('label'=>'Servidor','type'=>'select','options'=>$this->Servidor->getArraySimples('nome')),
-                'qualidade_id' => array('label'=>'Qualidade','type'=>'select','options'=>$qualidades_aceitas_options),
-            )
-        );
-        $this->set(
-                    array(
-                            'model_link'=>'Link',
-                            'campos_link' => $campos
-                        )
-                );
-        
-        
-        
+        $this->setLinkGrid($id);
         
         $this->set('edit',TRUE);
         $this->render('save');
@@ -148,6 +125,57 @@ class CapituloController extends AppController{
         $this->redirect(array('action' => 'lista'));
     }
     
-}
-
+    /*
+     * Função para adicionar os links de um capitulo
+     */
+    private function setLinkForm($capitulo_id,$anime_id){
+        $qualidades_aceitas = $this->Multimidia->find('first',array('conditions' => array('Multimidia.id' => $this->Anime->getField($anime_id,'multimidia_id'))));
+        $qualidades_aceitas = $qualidades_aceitas['Qualidades'];
+        $qualidades_aceitas_options = array();
+        foreach($qualidades_aceitas as $qualidade){
+            $qualidades_aceitas_options[$qualidade['id']]=$qualidade['sigla'];
+        }
+        
+        $campos = array(
+            'Novo Link' => array(
+                'capitulo_id' => array('type'=>'hidden','value'=>$capitulo_id),
+                'url' => array('required'=>TRUE),
+                'servidor_id' => array('label'=>'Servidor','type'=>'select','options'=>$this->Servidor->getArraySimples('nome')),
+                'qualidade_id' => array('label'=>'Qualidade','type'=>'select','options'=>$qualidades_aceitas_options),
+            )
+        );
+        $this->set(
+                    array(
+                            'model_link'=>'Link',
+                            'campos_link' => $campos
+                        )
+                );
+    }
+    
+    private function setLinkGrid($capitulo_id){
+        $this->beforeAdmin();
+        
+        $this->Paginator->settings = array(
+                                            'Link' => array(
+                                                'limit' => 20,
+        //                                        'fields' => array('Link.id','Servidor.nome'),
+                                                'order' => array('Servidor.nome'),
+                                                'conditions' => array('Link.capitulo_id'=>$capitulo_id),
+                                            ),
+                                        );
+        $lista = $this->paginate();
+        print_r($lista);
+        exit;
+        
+        $this->set(
+                array(
+                    'fields' => array('#'=>'Link.id','Servidor'=>'Servidor.nome'),
+                    'data' => $lista,
+                    'virtualFields' => array(),
+                )
+        );
+    }
+    
+    
+}   
 ?>
