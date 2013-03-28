@@ -124,22 +124,26 @@ class AnimeController extends AppController{
         );
     }
     
-    public function delete($id){
+    public function delete($id , $serie_id = NULL){
         $this->beforeAdmin();
         $nome = $this->Anime->getField($id,'nome');
+        $multimidia = $this->Multimidia->getField($this->Anime->getField($id,'multimidia_id'),'nome');
         $deletado = $this->Anime->delete($id);
         if($deletado==TRUE){
-            $this->Session->setFlash("O anime (".$nome.") foi deletada com sucesso!", 'alert', array(
+            $this->Session->setFlash("O ".strtolower($multimidia)." (".$nome.") foi deletado com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));            
         }else{
-            $this->Session->setFlash("O anime (".$nome.") não pode ser deletada!", 'alert', array(
+            $this->Session->setFlash("O ".strtolower($multimidia)." (".$nome.") não pode ser deletado!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));            
         }
-        $this->redirect(array('action' => 'lista'));
+        if(!empty($serie_id)){
+            $this->redirect(array('controller' => 'serie','action' => 'edit',$serie_id));            
+        }
+        $this->redirect(array('controller' => 'edit','action' => 'lista',$serie_id));
     }
     
 }
