@@ -80,6 +80,7 @@ class MenusComponent extends Component{
             "menu_capitulos_anime" => $anime['Anime']['nome'],
             "menu_capitulos_anime_id" => $anime['Anime']['id'],
             "menu_capitulos_nome_unidade" => $anime['Multimidia']['unidade'],
+            "menu_capitulos_nome" => $anime['Multimidia']['nome'],
             "menu_capitulos" => $animes_menu,
         );
     }

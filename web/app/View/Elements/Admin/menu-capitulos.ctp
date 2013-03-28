@@ -1,5 +1,6 @@
     <div class="well">
         <ul class="nav nav-list">
+            <li class="nav-header"><?php echo ucfirst($menu_capitulos_nome); ?></li>
             <li class="nav-header"><?php echo ucfirst($menu_capitulos_nome_unidade); ?> de <?php echo $menu_capitulos_anime; ?></li>
             <li>
                 <?php echo $this->Html->link('Novo '.strtolower($menu_capitulos_nome_unidade),'/capitulo/novo/'.$menu_capitulos_anime_id,array('tabindex'=>'-1')); ?>
