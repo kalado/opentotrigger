@@ -95,6 +95,9 @@ class AnimeController extends AppController{
                     );
             
             $this->set($this->Menus->MenuSerieADMIN($id_serie));
+            if(!empty($id)){
+                $this->set($this->Menus->MenuEpisodiosADMIN($id));
+            }
 
             
     }
