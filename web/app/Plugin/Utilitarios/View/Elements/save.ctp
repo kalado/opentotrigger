@@ -1,5 +1,10 @@
 <?php echo $this->Session->flash(); ?>
-<?php echo $this->FormGen->gerarFormulario($model,array('class'=>'horizontal'), $campos , array('label'=>'Salvar')); ?>
+<?php 
+if(!isset($botao_form)){
+    $botao_form = array('label'=>'Salvar');
+}
+?>
+<?php echo $this->FormGen->gerarFormulario($model,array('class'=>'horizontal'), $campos , $botao_form); ?>
 
 
 
