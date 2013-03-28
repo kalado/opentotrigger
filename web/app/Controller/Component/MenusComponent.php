@@ -16,8 +16,9 @@ class MenusComponent extends Component {
 
         $animes = $this->Anime->find('all', array('conditions' => array('Anime.serie_id' => $serie_id) ,'order'=>array('Multimidia.nome','Anime.nome')));
         
+        $animes_menu = array();
         foreach($animes as $anime){
-            $animes_menu[] = array($anime['Anime']['nome'] => array('id'=>$anime['Anime']['id'],'nome_unidade'=>$anime['Multimidia']['unidade']) );
+            $animes_menu[] = array('anime' =>$anime['Anime']['nome'] , 'id'=>$anime['Anime']['id'],'nome_unidade'=>$anime['Multimidia']['unidade']);
         }
         
         //print_r($animes_menu);exit;
@@ -49,7 +50,7 @@ class MenusComponent extends Component {
         return array(
             "serie_nome" => $serie,
             "serie_id" => $serie_id,
-            "menu_da_serie" => array(),
+            "menu_da_serie" => $animes_menu,
         );
     }
 
