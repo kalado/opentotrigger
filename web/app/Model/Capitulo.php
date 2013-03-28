@@ -6,11 +6,14 @@ class Capitulo extends AppModel{
         'Anime' => array(
             'className' => 'Anime',
         ),
-//        'Fansub' => array(
-//            'className' => 'Fansub',
-//        ),
-//        
     );
+    
+     var $hasMany = array(
+        'Links' => array(
+            'className' => 'Link',
+        ),
+    );
+   
     
 }
 ?>
