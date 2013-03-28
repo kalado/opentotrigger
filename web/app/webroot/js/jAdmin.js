@@ -3,6 +3,6 @@ $(document).ready(function(){
 		var answer = confirm('Você deseja deletar esse registro?\nCuidado essa ação pode deletar outros registros.');
 		return answer;
 	});
-                
-        $(".datePiker").datepicker();
+        
+        $(".datePiker").datepicker({format:"dd/mm/yyyy"});
 })
