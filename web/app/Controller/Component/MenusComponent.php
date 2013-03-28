@@ -73,7 +73,7 @@ class MenusComponent extends Component{
         // -unidade 4 (edit-delete)
         $animes_menu = array();
         foreach ($capitulos as $capitulo) {
-            $animes_menu[] = array('numero'=>$capitulo['Capitulo']['numero'] , 'id' => $capitulo['Capitulo']['numero']);
+            $animes_menu[] = array('numero'=>$capitulo['Capitulo']['numero'] , 'id' => $capitulo['Capitulo']['id']);
         }
         
         return array(
