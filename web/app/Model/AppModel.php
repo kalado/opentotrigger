@@ -85,19 +85,18 @@ class AppModel extends Model{
      *          $id => $label
      *      )
      * @param $label é o campo que será o label
-     * @param $in 
+     * @param $resource é para usar os resultados desse arrau, em vez de buscar todos os resultados
      * @param $id é o nome do campo que será o indice
      * 
      * @return retorna um array contendo os registros, esse array está formatado de forma simples e limpa. e está ordenado pelo $label
      * 
      */
-    function getArraySimples($label, $in = array(), $indice = 'id'){
+    function getArraySimples($label, $resource = array(), $indice = 'id'){
         $resutado = array();
-        if(empty($in)){
+        if(empty($resource)){
             $this->removerLigacoes();
             $resource = $this->find( 'all',array('joins'=>array() ,'fields' => array($this->name.'.'.$indice,$this->name.'.'.$label) , 'order' => array($this->name.'.'.$label)) );
             $this->voltarLigacoes();
-        }else{
         }
         
         foreach($resource as $value){
