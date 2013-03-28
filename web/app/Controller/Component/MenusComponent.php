@@ -1,13 +1,15 @@
 <?php
 
-class MenusComponent extends Component {
+class MenusComponent extends Component{
 
     function MenusComponent() {
         
     }
 
     private function ModelRegistre($modelName) {
-        eval("\$this->" . $modelName . " = ClassRegistry::init('" . $modelName . "');");
+        if(!isset($this->$modelName)){
+            eval("\$this->" . $modelName . " = ClassRegistry::init('" . $modelName . "');");
+        }
     }
 
     function MenuSerieADMIN($serie_id) {
@@ -27,36 +29,12 @@ class MenusComponent extends Component {
             
         }
         
-        //print_r($animes_menu);exit;
-        
-        /*
-          Ainda tenho que pensar na forma de ordenação
-          quem saber exibir
-
-          (Multimida)Nome do Anime
-         */
-
-
-        // -anime 1 (id - nome_unidade)
-        // -anime 2
-        // -anime 3
-        // -manga 1
-        // -manga 2
-        // -OVA 1
-        // -filme 1
-        // -filme 2
-        // -filme 3
-        // -filme 4
-
-
         $serie = $this->Serie->getField($serie_id, 'nome');
 
-
-
         return array(
-            "serie_nome" => $serie,
-            "serie_id" => $serie_id,
-            "menu_da_serie" => $animes_menu,
+            "menu_serie_nome" => $serie,
+            "menu_serie_id" => $serie_id,
+            "menu_serie" => $animes_menu,
         );
     }
 
@@ -73,6 +51,36 @@ class MenusComponent extends Component {
             'multimidia' => 'Multimidias',
             'idioma' => 'Idiomas',
             'qualidade' => 'Qualidades',
+        );
+    }
+    
+    function MenuEpisodiosADMIN($anime_id){
+        $this->ModelRegistre('Anime');
+        $this->ModelRegistre('Capitulo');
+
+        
+
+        
+
+        $anime = $this->Anime->find('first',array('conditions' => array('Anime.id' => $anime_id)));
+        $capitulos = $this->Capitulo->find('all',array('conditions'=>array('Anime.id'=>$anime_id),'order'=>array('Capitulo.numero')));
+        
+        
+        
+        // -unidade 1 (edit-delete)
+        // -unidade 2 (edit-delete)
+        // -unidade 3 (edit-delete)
+        // -unidade 4 (edit-delete)
+        $animes_menu = array();
+        foreach ($capitulos as $capitulo) {
+            $animes_menu[] = array('numero'=>$capitulo['Capitulo']['numero'] , 'id' => $capitulo['Capitulo']['numero']);
+        }
+        
+        return array(
+            "menu_capitulos_anime" => $anime['Anime']['nome'],
+            "menu_capitulos_anime_id" => $anime['Anime']['id'],
+            "menu_capitulos_nome_unidade" => $anime['Multimidia']['unidade'],
+            "menu_capitulos" => $animes_menu,
         );
     }
 

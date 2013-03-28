@@ -17,7 +17,10 @@
         
 </div>
 
-<?php if(isset($menu_da_serie)){ ?>
+<?php if(isset($menu_serie)){ ?>
     <?php echo $this->element("Admin/menu-serie"); ?>
 <? } ?>
 
+<?php if(isset($menu_capitulos)){ ?>
+    <?php echo $this->element("Admin/menu-capitulos"); ?>
+<? } ?>
