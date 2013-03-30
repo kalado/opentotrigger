@@ -56,18 +56,19 @@ class PaginatorGenHelper extends AppHelper{
             $linha = array();
             foreach($fields as $label => $campo){
                 if($label=="DELETE")continue;
+                $campo = explode(".", $campo);
+                if(!isset($dados[$campo[0]][$campo[1]])) continue;
                 if($label!="#"){
-                    $campo = explode(".", $campo);
                     $linha[$label] = $dados[$campo[0]][$campo[1]];
                 }else{
-                    $campo = explode(".", $campo);
                     $linha[$label]=  $this->Html->link($cont, '/'.$campo[0].'/edit/'.$dados[$campo[0]][$campo[1]]);
                     $delete_link =  '<a href="'.$this->Html->url('/'.$campo[0].'/delete/'.$dados[$campo[0]][$campo[1]]).'" class="btn btn-danger delete" ><i class="icon-trash"></i></a>';
                 }
             }
+            if(empty($linha))continue;
             $linha[] = $delete_link;
             $cont++;
-            $linhas[]=$linha;
+            $linhas[]= $linha;
         }
         return array_values($linhas);
     }
