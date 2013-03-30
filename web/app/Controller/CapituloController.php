@@ -152,18 +152,16 @@ class CapituloController extends AppController{
         $this->Paginator->settings = array(
                                             'Link' => array(
                                                 'limit' => 20,
-                                                'fields' => array('Link.id','Servidor.nome'),
-                                                'order' => array('Link.id'),
+                                                'fields' => array('Link.id','Servidor.nome','Qualidade.nome'),
                                                 'conditions' => array('Link.capitulo_id'=>$capitulo_id),
                                             ),
                                         );
-        $lista = $this->paginate();
-        //print_r($lista);
-        //exit;
+        $lista = $this->paginate('Link');
+        
         
         $this->set(
                 array(
-                    'fields' => array('#'=>'Link.id','Servidor'=>'Servidor.nome'),
+                    'fields' => array('#'=>'Link.id','Servidor'=>'Servidor.nome','Qualidade'=>'Qualidade.nome'),
                     'data' => $lista,
                     'virtualFields' => array(),
                 )
