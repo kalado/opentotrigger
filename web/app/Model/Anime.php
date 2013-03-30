@@ -35,7 +35,7 @@ class Anime extends AppModel{
     );
     
     
-    
+    var $dataFields = array("lancamento","finalizacao");
     
     
     public function afterSave( $created ){
