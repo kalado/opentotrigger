@@ -25,9 +25,6 @@ class AnimeController extends AppController{
         if($id != ""){
             $this->request->data = $this->Anime->find('first',array('conditions' => array($this->name.'.id' => $id)));
             
-            $this->request->data['Anime']['lancamento'] = $this->tratarData($this->request->data['Anime']['lancamento']);
-            $this->request->data['Anime']['finalizacao'] = $this->tratarData($this->request->data['Anime']['finalizacao']);
-            
             if(!empty ($this->request->data['Criado'])){
                 foreach ( $this->request->data['Criado'] as $autor){
                     $autores[] = $autor['id'];
