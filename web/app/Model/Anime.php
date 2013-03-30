@@ -10,7 +10,12 @@ class Anime extends AppModel{
         'Fansubs' => array(
             'className' => 'Fansub',
             'joinTable' => 'fansub_animes',
+        ),
+        'Autoria' => array(
+            'className' => 'Autor',
+            'joinTable' => 'autoria_anime',
         )
+        
     );
     
     var $hasMany = array(
