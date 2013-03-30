@@ -44,6 +44,7 @@ class MenusComponent extends Component{
             'serie' => 'Series',
             'Dados Tecnicos',
             'autor' => 'Autores',
+            'genero' => 'Generos',
             'fansub' => 'Fansubs',
             'Configurações',
             'servidor' => 'Servidores',
