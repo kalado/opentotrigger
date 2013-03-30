@@ -1,23 +1,22 @@
 <?php
-class ServidorController extends AppController{
+class GeneroController extends AppController{
     
     /**
-     * Adiciona ou Edita um novo servidor
+     * Adiciona ou Edita um novo genero
      */
     private function save($id=NULL){
         if(!empty($this->request->data)){
-            $save = $this->Servidor->save($this->request->data);
-            
+            $save = $this->Genero->save($this->request->data);
             if($save!==FALSE){
-                $this->Session->setFlash("O Servidor foi salvo com sucesso!", 'alert', array(
+                $this->Session->setFlash("O Genero foi salvo com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));
-                $id = $this->Servidor->getInsertID();
-                $id = ((empty($id))?$this->request->data['Servidor']['id']:$id); 
+                $id = $this->Genero->getInsertID();
+                $id = ((empty($id))?$this->request->data['Genero']['id']:$id); 
                 $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
             }else{
-                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o servidor, favor conferir os dados e tentar novamente!", 'alert', array(
+                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o genero, favor conferir os dados e tentar novamente!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));
@@ -26,25 +25,20 @@ class ServidorController extends AppController{
         }
         
         if($id != ""){
-            $this->request->data = $this->Servidor->find('first',array('conditions' => array('id' => $id)));
+            $this->request->data = $this->Genero->find('first',array('conditions' => array('id' => $id)));
         }
-        if($id!=NULL)$this->page_title = $this->Servidor->getField($id,'nome');
-        $fildset = (($id==NULL)?"Novo Servidor":"Editar servidor");
+        if($id!=NULL)$this->page_title = $this->Genero->getField($id,'nome');
+        $fildset = (($id==NULL)?"Novo Genero":"Editar Genero");
         $campos = array(
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
                     'nome' => array('label'=>'Nome','required'=>TRUE),
-                    'habilitado' => array('type'=>'radio' , 'options'=>array('1' => 'Ativado','0' => 'Desativado') , "value"=>((isset($this->request->data['Servidor']['habilitado'])?$this->request->data['Servidor']['habilitado']:1)) ),
-                ),
-                'Adicionais' => array(
-                    'usuario' => array('label'=>'Usuário'),
-                    'senha' => array(),
                 )
             );
         
             $this->set(
                         array(
-                                'model'=>'Servidor',
+                                'model'=>'Genero',
                                 'campos' => $campos
                             )
                     );
@@ -66,27 +60,26 @@ class ServidorController extends AppController{
     
     public function lista(){
         $this->beforeAdmin();
-        $lista = $this->getPaginate('Servidor', array('Servidor.nome') , array('id','nome','habilitado'));
+        $lista = $this->getPaginate('Genero', array('Genero.nome'));
         $this->set(
                 array(
-                    'fields' => array('#'=>'Servidor.id','Nome'=>'Servidor.nome' , 'Ativado' => 'Servidor.habilitado'),
+                    'fields' => array('#'=>'Genero.id','Nome'=>'Genero.nome'),
                     'data' => $lista,
-                    'virtualFields' => array("Servidor.habilitado"=>array("1"=>"Sim","0"=>"Não")),
                 )
         );
     }
     
     public function delete($id){
         $this->beforeAdmin();
-        $nome = $this->Servidor->getField($id,'nome');
-        $deletado = $this->Servidor->delete($id);
+        $nome = $this->Genero->getField($id,'nome');
+        $deletado = $this->Genero->delete($id);
         if($deletado==TRUE){
-            $this->Session->setFlash("O servidor (".$nome.") foi deletado com sucesso!", 'alert', array(
+            $this->Session->setFlash("O genero (".$nome.") foi deletado com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));            
         }else{
-            $this->Session->setFlash("O servidor (".$nome.") não pode ser deletado!", 'alert', array(
+            $this->Session->setFlash("O genero (".$nome.") não pode ser deletado!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));            
