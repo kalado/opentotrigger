@@ -1,0 +1,124 @@
+\documentclass{abnt}
+
+%	Pacote para formatação ABNT	%
+\usepackage[num]{abntcite}
+
+
+%	Pacotes para acentuação e escrita	%
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+
+%	Pacote para inserir imagens	%
+\usepackage{graphicx}
+%\begin{figure}
+%\includegraphics[width= X, height=X, scale , angle ]{imagem.jpg}
+%\caption{Minha imagem em latex}
+%\end{figure}
+
+%	Pacote para criar links externos	%
+\usepackage[hidelinks]{hyperref}
+%\href{url}{texto}
+
+
+%	Links internos	%
+%\label{nomeDaEtiqueta}
+%\ref{nomeDaEtiqueta}
+% referencia para a section da label nomeDaEtiqueta
+%\pageref{nomeDaEtiqueta}
+% referencia para a página em que a label aparece
+
+
+%	Dados basicos para usar em outros lugares - nesse trabalho eu vou usar a classe da abnt	%
+\title{Open-To-Trigger e Anime-Trigger}
+\author{Bruno Motta Azevedo do Nascimeno}
+ 
+
+
+
+
+\autor{Bruno Motta Azevedo do Nascimeno}
+\titulo{Open-To-Trigger e Anime-Trigger\\v 0.1}
+%\orientador[Professor: ]{Leonardo Conegundes Martinez}
+%\comentario{GRAFOS E ALGORITMOS COMPUTACIONAIS - Modelagem de problemas em Grafos}
+%\instituicao{PUC Minas}\local{Belo Horizonte - MG}
+\data{29 de outubro de 2012}
+
+\begin{document}
+
+
+
+
+%	Dados para gerar a capa e a folha de rosto	%
+
+%	Gerar capa e folha de rosto	%
+\capa
+%\folhaderosto
+
+\begin{resumo}
+Esse documento tem como objetivo explicar os projetos Open-To-Trigger e Anime-Trigger. Assim como esclarecer as dúvidas esse documento serve de guia para saber as funcionalidades de cada um dos projetos.
+\end{resumo}
+
+%\listoffigures
+%\listoftables
+%\listadequadros
+\sumario
+
+\chapter{Definições Básicas}
+\section*{ Open-to-Trigger}
+Um CMS (Gestor de Conteúdo) que ajuda deve ser abrangente para conseguir fazer a gestão de diversos tipos de material em diversos ambientes.
+
+\section*{Anime-Trigger}
+Um site baseado na plataforma Open-to-Trigger , que tem como objetivo ajudar os usuários a ter acesso e incentivo a explorar o universo de animes, mangas e diversas outras formas de entretenimento de origem japonesa.
+
+\chapter*{Funcionalidades do Open-To-Trigger}
+\section{Agrupar Séries}
+Atualmente existem diversas fontes sobre um determinado material, como vários livros, seriados, filmes e animações que remetem a um mesmo mundo , ou seja diversas versões de uma mesma historia. Com base nisso um dos objetivos da plataforma é agrupar todo esse material de uma forma que facilite e ajude aos usuários encontrarem o máximo possível de todo o material sobre aquela historia em questão.
+\par
+Cada conjunto desses materiais serão chamados de \textbf{SÉRIES}.
+\section{Diversas formas de Multimídia}
+Como o objetivo da plataforma é ser abrangente nas variedades de materiais que esta pode suportar diversas formas de materiais, o espaço para escolher as formas de multimídia, não deve ser restrito, permitindo aos usuários administradores do sistema escolherem as formas que esses materiais devem ser organizados.
+\par
+Cada material deve estar agrupado dentro de uma forma e a essa forma é dado o nome de \textbf{MULTIMÍDIA}
+\section{Diversos Endereços e Idiomas}
+Cada material, deve suportar vários endereços, podendo ser esses endereços, links na internet ou número de uma estante de uma biblioteca.
+\par
+Assim como vários endereços deve conter vários idiomas, ou seja, cada material pode ter diversos endereços, cada um com um idioma, ou até mesmo diversos endereços com um único idioma. Para cada endereço deve-se informar o idioma correspondente.
+Esses endereços são chamados de  \textbf{LINKS}.
+ \section{Diversos Episódios}
+\par
+Cada material individual pode ser composto de vários pedaços, cada pedaço individual é chamado de \textbf{ESPSÓDIO}.
+\par
+Um \textbf{ESPSÓDIO} pode ser tanto um CD, ou DVD de um filme, quanto um capitulo de um livro, ou realmente um episódio de uma temporada de uma serie de TV.
+
+\chapter{Anime-Trigger}
+\section{Definições basicas}
+\subsection{ANIMES}
+Cada material disponibilizado será chamado de \textbf{ANIME}, mesmo que este seja um manga, filme ou qualquer outra coisa, porem as informações sobre um anime são chamadas e tratadas como informação, todas as \textbf{SÉRIES} e \textbf{ANIMES} devem oferecer suporte para a inserção de informações relevantes.
+\subsection{SÉRIE}
+No Anime-Trigger uma série será o agrupamento de todos os \textbf{ANIMES} e informações de um mundo, referente a um mesmo material ou franquia.
+\section{Funcionalidades}
+\subsection{Listar Séries}
+Um dos objetivos do anime-Trigger é apresentar sempre \textbf{SÉRIES} e não apenas alguns \textbf{ANIMES}, visando assim aumentar o interesse dos usuários no universo em questão.
+\par
+\subsection{Serviço de Acompanhamento}
+O sistema deve, registrar sempre que um usuário fizer download de algum \textbf{ESPSÓDIO} de algum \textbf{ANIME}, e os usuários podem marcar os \textbf{ESPSÓDIOS}, \textbf{ANIMES} e \textbf{SÉRIES} que eles já assistiram. Esse material que já foi visto deve ser ocultado da listagem, podendo ser mostrado ao usuário, apenas se ele desejar.
+\par
+Alem dessa funcionalidade o usuário pode escolher ser avisado (as formas de aviso disponíveis estão em estudo de viabilidade) quando algum \textbf{ESPSÓDIO} de um \textbf{ANIME} ou \textbf{SÉRIE} for inserido no sistema.
+\subsection{Lista Inteligente}
+Todas as buscas e exibições de séries devem obedecer as seguintes regras, exeto quando o usuário informa que deseja a lista completa real, oque nesse caso irá ignorar esses filtros.
+\begin{itemize}
+	\item Mostrar somente conteúdo das \textbf{SÉRIES} em que o usuário do sistema ainda não tenha assistido completamente.
+	\item Permitir ao usuário marcar uma serie que ele não goste, para que esta não seja exibida novamente (um marcador de não gosto).
+\end{itemize}
+\subsection{Sistema de aviso para links quebrados}
+\par
+Visando uma maior facilidade e comodidade para os usuários, o sistema deve fornecer uma maneira fácil e rápida, para todos usuários, de informar um link que não funciona. Essa maneira deve ser rápida e fácil sem exigir preencher formulários e gastando o mínimo de tempo possível.
+\subsection{Lista de Links}
+\par
+Para ajudar aos usuários que usam gerenciadores de download, o sistema deve fornecer automaticamente uma lista de todos os links, em ordem de episódios e separados por servidor, uma lista com apenas os links do \textbf{ANIME} em questão.
+
+
+\end{document}
