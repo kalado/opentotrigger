@@ -12,9 +12,10 @@ class LinkController extends AppController{
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));
-                $id = $this->Link->getInsertID();
-                $id = ((empty($id))?$this->request->data['Link']['id']:$id); 
-                $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
+                if($id!=NULL){
+                        $this->redirect(array('action' => 'edit' , $id ));
+                }
+                $this->redirect(array('controller' => 'capitulo', 'action' => 'edit' , $this->request->data['Link']['capitulo_id'] ) );
             }else{
                 $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o link, favor conferir os dados e tentar novamente!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
@@ -23,8 +24,6 @@ class LinkController extends AppController{
             }
             
         }
-        
-        
         
         $qualidades_aceitas_options = array();
         if($id != ""){
@@ -39,18 +38,19 @@ class LinkController extends AppController{
         
         $campos = array(
                 $fildset => array(
+                    'capitulo_id' => array("type"=>"hidden"),
                     'url' => array('required'=>TRUE),
                     'servidor_id' => array('label'=>'Servidor','type'=>'select','options'=>$this->Servidor->getArraySimples('nome')),
                     'qualidade_id' => array('label'=>'Qualidade','type'=>'select','options'=>$qualidades_aceitas_options),
                 )
             );
         
-            $this->set(
-                        array(
-                            'model' => 'Link',
-                            'campos' => $campos
-                            )
-                    );
+        $this->set(
+                    array(
+                        'model' => 'Link',
+                        'campos' => $campos
+                        )
+                );
     }
     
     public function novo(){
