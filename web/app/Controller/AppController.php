@@ -41,6 +41,7 @@ class AppController extends Controller {
                         'Autor',
                         'Capitulo',
                         'Fansub',
+                        'Genero',
                         'Idioma',
                         'Link',
                         'Multimidia',
