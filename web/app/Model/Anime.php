@@ -14,8 +14,11 @@ class Anime extends AppModel{
         'Autoria' => array(
             'className' => 'Autor',
             'joinTable' => 'autoria_anime',
+        ),
+        'Generos' => array(
+            'className' => 'Genero',
+            'joinTable' => 'animes_generos',
         )
-        
     );
     
     var $hasMany = array(
@@ -73,16 +76,29 @@ class Anime extends AppModel{
                         ' ;');
         
         
+        foreach($this->data[$this->name]['generos'] as $genero){
+            $fansubs[] = '('.$id.','.$genero.')';
+        }
+        $this->query(
+                    'DELETE FROM animes_generos '.
+                        'WHERE anime_id='.$id.
+                    ';'.
+                    'INSERT INTO animes_generos '.
+                        'VALUES '.
+                            implode(",", $fansubs).
+                        ' ;');
+        
+        
     }
     
         public function getAutores($id){
-        $qualidades = $this->query(
+        $autores = $this->query(
                     'SELECT * FROM autoria_anime AS Autores '.
                         'WHERE '.
                             'Autores.anime_id='.$id.
                         ' ;');
         
-        return $qualidades;
+        return $autores;
     }
     
     
