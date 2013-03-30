@@ -39,15 +39,36 @@ class AppModel extends Model{
     public function beforeSave($options = array()){
         parent::beforeSave($options);
         
-        $campos = $this->dataFields;
-        foreach( $campos as $campo){
-            if(isset($this->data[$this->name][$campo])){
-            $this->data[$this->name][$campo] = $this->tratarData($this->data[$this->name][$campo]);
-            }
-        }
+        $this->data = $this->tratarDataRegistro($this->data);
     }
     
-    
+    public function find( $type = 'first' , $query = array() ){
+        $resultado = parent::find($type, $query);
+        if($type=="first"){
+            $resultado = $this->tratarDataRegistro($resultado);
+        }else if($type=="all"){
+            $final = array();
+            foreach ($resultado as $res){
+                $final[] = $this->tratarDataRegistro($res);
+            }
+            $resultado = $final;
+        }
+        
+        return $resultado;
+    }
+
+    private function tratarDataRegistro($registro){
+        
+        $campos = $this->dataFields;
+        foreach( $campos as $campo){
+            if(isset($registro[$this->name][$campo])){
+            $registro[$this->name][$campo] = $this->tratarData($registro[$this->name][$campo]);
+            }
+        }
+        
+        return $registro;
+    }
+
     private function removerLigacoes(){
         $this->ligacoes['hasMany'] = $this->hasMany;
         $this->ligacoes['hasAndBelongsToMany'] = $this->hasAndBelongsToMany;
