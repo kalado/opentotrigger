@@ -26,7 +26,7 @@ class ServidorController extends AppController{
         }
         
         if($id != ""){
-            $this->request->data = $this->Servidor->find('first',array('conditions' => array('id' => $id) , 'fields'=>array('id','nome','habilitado','usuario','senha')));
+            $this->request->data = $this->Servidor->find('first',array('conditions' => array('id' => $id)));
         }
         if($id!=NULL)$this->page_title = $this->Servidor->getField($id,'nome');
         $fildset = (($id==NULL)?"Novo Servidor":"Editar servidor");
@@ -34,7 +34,7 @@ class ServidorController extends AppController{
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
                     'nome' => array('label'=>'Nome','required'=>TRUE),
-                    'habilitado' => array('type'=>'radio' , 'options'=>array('1' => 'Ativado', '0' => 'Desativado') , 'value'=>'1'),
+                    'habilitado' => array('type'=>'radio' , 'options'=>array('1' => 'Ativado','0' => 'Desativado') , "value"=>((isset($this->request->data['Servidor']['habilitado'])?$this->request->data['Servidor']['habilitado']:1)) ),
                 ),
                 'Adicionais' => array(
                     'usuario' => array('label'=>'Usuário'),
