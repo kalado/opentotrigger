@@ -1,22 +1,22 @@
 <?php
-class IdiomaController extends AppController{
+class LinkController extends AppController{
     
     /**
-     * Adiciona ou Edita um novo idioma
+     * Adiciona ou Edita um novo link
      */
     private function save($id=NULL){
         if(!empty($this->request->data)){
-            $save = $this->Idioma->save($this->request->data);
+            $save = $this->Link->save($this->request->data);
             if($save!==FALSE){
-                $this->Session->setFlash("O idioma foi salvo com sucesso!", 'alert', array(
+                $this->Session->setFlash("O link foi salvo com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));
-                $id = $this->Idioma->getInsertID();
-                $id = ((empty($id))?$this->request->data['Idioma']['id']:$id); 
+                $id = $this->Link->getInsertID();
+                $id = ((empty($id))?$this->request->data['Link']['id']:$id); 
                 $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
             }else{
-                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o idioma, favor conferir os dados e tentar novamente!", 'alert', array(
+                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o link, favor conferir os dados e tentar novamente!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));
@@ -24,24 +24,30 @@ class IdiomaController extends AppController{
             
         }
         
+        
+        
+        $qualidades_aceitas_options = array();
         if($id != ""){
-            $this->request->data = $this->Idioma->find('first',array('conditions' => array('id' => $id) , 'fields'=>array('id','nome','sigla')));
+            $this->request->data = $this->Link->find('first',array('conditions' => array('id' => $id)));
+            
+            $qualidades_aceitas_options = $this->Multimidia->getQualidadesAceitas($this->Anime->getField($this->Capitulo->getField($this->request->data['Link']['capitulo_id'],'anime_id'),'multimidia_id'));
+            
         }
         
-        if($id!=NULL)$this->page_title = $this->Idioma->getField($id,'nome');
-        $fildset = (($id==NULL)?"Novo idioma":"Editar idioma");
+        if($id!=NULL)$this->page_title = $this->Link->getField($id,'nome');
+        $fildset = (($id==NULL)?"Novo link":"Editar link");
         
         $campos = array(
                 $fildset => array(
-                    'id' => array('type'=>'hidden'),
-                    'nome' => array('label'=>'Nome'),
-                    'sigla' => array(),
+                    'url' => array('required'=>TRUE),
+                    'servidor_id' => array('label'=>'Servidor','type'=>'select','options'=>$this->Servidor->getArraySimples('nome')),
+                    'qualidade_id' => array('label'=>'Qualidade','type'=>'select','options'=>$qualidades_aceitas_options),
                 )
             );
         
             $this->set(
                         array(
-                            'model' => 'Idioma',
+                            'model' => 'Link',
                             'campos' => $campos
                             )
                     );
@@ -61,29 +67,17 @@ class IdiomaController extends AppController{
     }
     
     
-    public function lista(){
-        $this->beforeAdmin();
-        $lista = $this->getPaginate('Idioma', array('Idioma.nome') , array('id','nome','sigla'));
-        $this->set(
-                array(
-                    'fields' => array('#'=>'Idioma.id','Nome'=>'Idioma.nome' , 'Sigla' => 'Idioma.sigla'),
-                    'data' => $lista,
-                    'virtualFields' => array(),
-                )
-        );
-    }
-    
     public function delete($id){
         $this->beforeAdmin();
-        $nome = $this->Idioma->getField($id,'nome');
-        $deletado = $this->Idioma->delete($id);
+        $nome = $this->Link->getField($id,'nome');
+        $deletado = $this->Link->delete($id);
         if($deletado==TRUE){
-            $this->Session->setFlash("O idioma (".$nome.") foi deletado com sucesso!", 'alert', array(
+            $this->Session->setFlash("O link foi deletado com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));            
         }else{
-            $this->Session->setFlash("O idioma (".$nome.") não pode ser deletado!", 'alert', array(
+            $this->Session->setFlash("O link não pode ser deletado!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));            

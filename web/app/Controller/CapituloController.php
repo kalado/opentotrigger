@@ -129,13 +129,7 @@ class CapituloController extends AppController{
      * Função para adicionar os links de um capitulo
      */
     private function setLinkForm($capitulo_id,$anime_id){
-        $qualidades_aceitas = $this->Multimidia->find('first',array('conditions' => array('Multimidia.id' => $this->Anime->getField($anime_id,'multimidia_id'))));
-        $qualidades_aceitas = $qualidades_aceitas['Qualidades'];
-        $qualidades_aceitas_options = array();
-        foreach($qualidades_aceitas as $qualidade){
-            $qualidades_aceitas_options[$qualidade['id']]=$qualidade['sigla'];
-        }
-        
+        $qualidades_aceitas_options = $this->Multimidia->getQualidadesAceitas($this->Anime->getField($anime_id,'multimidia_id'));
         $campos = array(
             'Novo Link' => array(
                 'capitulo_id' => array('type'=>'hidden','value'=>$capitulo_id),
