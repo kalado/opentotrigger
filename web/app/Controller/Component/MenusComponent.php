@@ -58,14 +58,8 @@ class MenusComponent extends Component{
         $this->ModelRegistre('Anime');
         $this->ModelRegistre('Capitulo');
 
-        
-
-        
-
         $anime = $this->Anime->find('first',array('conditions' => array('Anime.id' => $anime_id)));
         $capitulos = $this->Capitulo->find('all',array('conditions'=>array('Anime.id'=>$anime_id),'order'=>array('Capitulo.numero')));
-        
-        
         
         // -unidade 1 (edit-delete)
         // -unidade 2 (edit-delete)
@@ -84,7 +78,25 @@ class MenusComponent extends Component{
             "menu_capitulos" => $animes_menu,
         );
     }
+    
+    function MenuNoticiasSerieADMIN($serie_id){
+        $this->ModelRegistre('Anime');
+        $this->ModelRegistre('Capitulo');
 
+        //Noticias (serie_nome)
+        //Nova noticia
+        //Titulo 01 (EDIT - DELETE)
+        //Titulo 02 (EDIT - DELETE)
+        //Titulo 03 (EDIT - DELETE)
+        //Titulo 04 (EDIT - DELETE)
+        
+        
+        
+        return array(
+            "menu_noticiasSerie_nome" => $this->Serie->getField($serie_id,'nome'),
+            "menu_noticias" => $animes_menu,
+        );
+        
+    }
 }
-
 ?>
