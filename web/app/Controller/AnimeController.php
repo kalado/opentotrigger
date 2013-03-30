@@ -64,7 +64,7 @@ class AnimeController extends AppController{
             }
             $this->request->data['Anime']['autores'] =  array_map("intval", $autores);
         }
-        $fildset = (($id==NULL)?"Novo Material":"Editar");
+        $fildset = (($id==NULL)?"Novo Material":"Editar ".$this->data['Multimidia']['nome']);
         $campos = array(
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
