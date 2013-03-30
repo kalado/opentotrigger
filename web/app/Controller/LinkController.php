@@ -27,15 +27,19 @@ class LinkController extends AppController{
         
         $qualidades_aceitas_options = array();
         if($id != ""){
-            $this->request->data = $this->Link->find('first',array('conditions' => array('id' => $id)));
+            $this->request->data = $this->Link->find('first',array('conditions' => array($this->name.'.id' => $id)));
             
             $qualidades_aceitas_options = $this->Multimidia->getQualidadesAceitas($this->Anime->getField($this->Capitulo->getField($this->request->data['Link']['capitulo_id'],'anime_id'),'multimidia_id'));
             
         }
         
-        if($id!=NULL)$this->page_title = $this->Link->getField($id,'nome');
-        $fildset = (($id==NULL)?"Novo link":"Editar link");
         
+        $anime_id = $this->Capitulo->getField($this->request->data['Link']['capitulo_id'],'anime_id');
+        $this->set($this->Menus->MenuSerieADMIN($this->Anime->getField($anime_id,'serie_id')));
+        $this->set($this->Menus->MenuEpisodiosADMIN($anime_id));
+        
+        $fildset = (($id==NULL)?"Novo link":"Editar link");
+        $fildset .= ": ".$this->Anime->getField($anime_id,'nome');
         $campos = array(
                 $fildset => array(
                     'capitulo_id' => array("type"=>"hidden"),
@@ -51,6 +55,12 @@ class LinkController extends AppController{
                         'campos' => $campos
                         )
                 );
+        
+        
+        $anime_id = $this->Capitulo->getField($this->request->data['Link']['capitulo_id'],'anime_id');
+        $this->set($this->Menus->MenuSerieADMIN($this->Anime->getField($anime_id,'serie_id')));
+        $this->set($this->Menus->MenuEpisodiosADMIN($anime_id));
+        
     }
     
     public function novo(){
