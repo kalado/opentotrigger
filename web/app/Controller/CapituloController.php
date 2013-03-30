@@ -152,7 +152,7 @@ class CapituloController extends AppController{
         $this->Paginator->settings = array(
                                             'Link' => array(
                                                 'limit' => 20,
-                                                'fields' => array('Link.id','Servidor.nome','Qualidade.nome'),
+                                                'fields' => array('Link.id','Servidor.nome','Servidor.habilitado','Qualidade.nome'),
                                                 'conditions' => array('Link.capitulo_id'=>$capitulo_id),
                                             ),
                                         );
@@ -161,9 +161,9 @@ class CapituloController extends AppController{
         
         $this->set(
                 array(
-                    'fields' => array('#'=>'Link.id','Servidor'=>'Servidor.nome','Qualidade'=>'Qualidade.nome'),
+                    'fields' => array('#'=>'Link.id','Servidor'=>'Servidor.nome','Qualidade'=>'Qualidade.nome','Ativo'=>'Servidor.habilitado'),
                     'data' => $lista,
-                    'virtualFields' => array(),
+                    'virtualFields' => array("Servidor.habilitado"=>array("1"=>"Sim","0"=>"Não")),
                 )
         );
     }
