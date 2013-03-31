@@ -43,6 +43,15 @@ class AnimeController extends AppController{
                 $fansubs = array();
             }
             $this->request->data['Anime']['fansubs'] =  array_map("intval", $fansubs);
+            
+            if(!empty ($this->request->data['Generos'])){
+                foreach ( $this->request->data['Generos'] as $genero){
+                    $generos[] = $genero['id'];
+                }
+            }else{
+                $generos = array();
+            }
+            $this->request->data['Anime']['generos'] =  array_map("intval", $generos);
                         
         }
         if($id!=NULL){
@@ -63,6 +72,16 @@ class AnimeController extends AppController{
                 $autores = array();
             }
             $this->request->data['Anime']['autores'] =  array_map("intval", $autores);
+            
+            $generos = $this->Serie->getGeneros($id_serie);
+            if(!empty($generos) ){
+                foreach ( $generos as $genero){
+                    $genero_final[] = $genero['Generos']['genero_id'];
+                }
+            }else{
+                $genero_final = array();
+            }
+            $this->request->data['Anime']['generos'] =  array_map("intval", $genero_final);
         }
         $fildset = (($id==NULL)?"Novo Material":"Editar ".$this->data['Multimidia']['nome']);
         $campos = array(
@@ -81,6 +100,7 @@ class AnimeController extends AppController{
                     'autores' => array('label'=>'Autores' , 'type'=>'checkbox-inline', 'options' => $this->Autor->getArraySimples('nome')),
                     'fansubs' => array('label'=>'Fansubs' , 'type'=>'checkbox-inline', 'options' => $this->Fansub->getArraySimples('sigla')),
                     'idioma_id' => array('label'=>'Idioma','type'=>'select','options'=>$this->Idioma->getArraySimples('nome')),
+                    'generos' => array('label'=>'Generos' , 'type'=>'checkbox-inline', 'options' => $this->Genero->getArraySimples('nome')),
                 )
             );
         
