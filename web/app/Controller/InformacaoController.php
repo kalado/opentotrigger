@@ -1,59 +1,63 @@
 <?php
-class MultimidiaController extends AppController{
+class InformacaoController extends AppController{
     
     /**
      * Adiciona ou Edita um novo tipo de usuário
      */
-    private function save($id=NULL){
+    private function save($id=NULL , $serie_id=NULL){
         if(!empty($this->request->data)){
-            $save = $this->Multimidia->save($this->request->data);
+            $save = $this->Informacao->save($this->request->data);
             if($save!==FALSE){
-                $this->Session->setFlash("A Multimidia foi salva com sucesso!", 'alert', array(
+                $this->Session->setFlash("A Informacao foi salva com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));
-                $id = $this->Multimidia->getInsertID();
-                $id = ((empty($id))?$this->request->data['Multimidia']['id']:$id); 
+                $id = $this->Informacao->getInsertID();
+                $id = ((empty($id))?$this->request->data['Informacao']['id']:$id); 
                 $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
             }else{
-                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar a Multimidia, favor conferir os dados e tentar novamente!", 'alert', array(
+                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar a Informacao, favor conferir os dados e tentar novamente!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));
             }
         }
         if($id != ""){
-            $this->request->data = $this->Multimidia->find('first',array('conditions' => array('id' => $id) , 'fields'=>array('id','nome','unidade')));
-            if(!empty ($this->request->data['Qualidades'])){
-                foreach ( $this->request->data['Qualidades'] as $compativeis){
-                    $qualidades_compativeis[] = $compativeis['id'];
-                }
-            }else{
-                $qualidades_compativeis = array();
-            }
-            $this->request->data['Multimidia']['formatos_aceitos'] = array_map('intval', $qualidades_compativeis);
+            $this->request->data = $this->Informacao->find('first',array('conditions' => array($this->name.'.id' => $id) ));
+            $serie_id = $this->request->data['Topico']['serie_id'];
         }
-        if($id!=NULL)$this->page_title = $this->Multimidia->getField($id,'nome');
-        $fildset = (($id==NULL)?"Nova Multimidia":"Editar Multimidia");
+        
+        $topicos = array();
+        $topicos_tmp = $this->Topico->getArraySimples('nome',  $this->Topico->find('all',array('conditions'=>array('Topico.serie_id'=>$serie_id))));
+        foreach ($topicos_tmp as $id_topico => $label){
+            $topicos[$id_topico] = $label." (".$this->Idioma->getField($this->Topico->getField($id_topico,'idioma_id'),'nome').")";
+        }
+        
+        
+        if($id!=NULL)$this->page_title = $this->Informacao->getField($id,'titulo');
+        $fildset = (($id==NULL)?"Nova Informacao":"Editar Informacao");
         $campos = array(
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
-                    'nome' => array('label'=>'Nome','required'=>TRUE),
-                    'unidade' => array('label'=>'Nome da unidade','required'=>TRUE),
-                    'formatos_aceitos' => array('label'=>'Formatos Aceitos' , 'type'=>'select-multiple' , 'options' => $this->Qualidade->getArraySimples('sigla')),
+                    'topico_id' => array('label'=>'Tópico da informação' , 'type'=>'select' , 'options' => $topicos,'class'=>'input-block-level'),
+                    'titulo' => array('label'=>'Nome','required'=>TRUE,'class'=>'input-block-level'),
+                    'conteudo' => array('type'=>'textarea-editor','class'=>'input-block-level'),
                 ),
             );
             $this->set(
                         array(
-                                'model'=>'Multimidia',
+                                'model'=>'Informacao',
                                 'campos' => $campos
                             )
                     );
+            
+            $this->set($this->Menus->MenuSerieADMIN($serie_id));
+            $this->set($this->Menus->MenuNoticiasSerieADMIN($serie_id));
     }
     
-    public function novo(){
+    public function novo($serie_id){
         $this->beforeAdmin();
-        $this->save();
+        $this->save(NULL,$serie_id);
         $this->render('save');
     }
     
@@ -67,10 +71,10 @@ class MultimidiaController extends AppController{
     
     public function lista(){
         $this->beforeAdmin();
-        $lista = $this->getPaginate('Multimidia', array('Multimidia.nome') , array('id','nome'));
+        $lista = $this->getPaginate('Informacao', array('Informacao.nome') , array('id','nome'));
         $this->set(
                 array(
-                    'fields' => array('#'=>'Multimidia.id','Nome'=>'Multimidia.nome'),
+                    'fields' => array('#'=>'Informacao.id','Nome'=>'Informacao.nome'),
                     'data' => $lista,
                     'virtualFields' => array(),
                 )
@@ -79,8 +83,12 @@ class MultimidiaController extends AppController{
     
     public function delete($id){
         $this->beforeAdmin();
-        $nome = $this->Multimidia->getField($id,'nome');
-        $deletado = $this->Multimidia->delete($id);
+        $nome = $this->Informacao->getField($id,'titulo');
+        $serie_id = $this->Topico->getField($this->Informacao->getField($id,'topico_id'),'serie_id');
+        
+        
+        
+        $deletado = $this->Informacao->delete($id);
         if($deletado==TRUE){
             $this->Session->setFlash("A multimidia (".$nome.") foi deletada com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
@@ -92,7 +100,7 @@ class MultimidiaController extends AppController{
                     'class' => 'alert-error'
                 ));            
         }
-        $this->redirect(array('action' => 'lista'));
+        $this->redirect(array('controller' => 'serie','action' => 'edit'),$serie_id);
     }
     
 }
