@@ -81,21 +81,34 @@ class MenusComponent extends Component{
     }
     
     function MenuNoticiasSerieADMIN($serie_id){
-        $this->ModelRegistre('Anime');
-        $this->ModelRegistre('Capitulo');
-
-        //Noticias (serie_nome)
-        //Nova noticia
-        //Titulo 01 (EDIT - DELETE)
-        //Titulo 02 (EDIT - DELETE)
-        //Titulo 03 (EDIT - DELETE)
-        //Titulo 04 (EDIT - DELETE)
+        $this->ModelRegistre('Topico');
+        $this->ModelRegistre('Serie');
         
+        
+        $topicos = $this->Topico->find('all',array('conditions'=>array('Topico.serie_id'=>$serie_id)));
+        
+        //print_r($topicos);exit;
+        
+        //Noticias (serie_nome)
+        //Novo Tópico
+        //Nova noticia (serie_id)
+        //Topico
+            //Titulo 01 (EDIT - DELETE)
+            //Titulo 02 (EDIT - DELETE)
+            //Titulo 03 (EDIT - DELETE)
+            //Titulo 04 (EDIT - DELETE)
+        //Outro topico
+            //Titulo 01 (EDIT - DELETE)
+            //Titulo 02 (EDIT - DELETE)
+            //Titulo 03 (EDIT - DELETE)
+            //Titulo 04 (EDIT - DELETE)
+                
         
         
         return array(
             "menu_noticiasSerie_nome" => $this->Serie->getField($serie_id,'nome'),
-            "menu_noticias" => $animes_menu,
+            "meni_noticias_serie_id"=> $serie_id,
+            "menu_noticias" => $topicos,
         );
         
     }

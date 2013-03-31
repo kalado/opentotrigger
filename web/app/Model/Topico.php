@@ -5,13 +5,14 @@ class Topico extends AppModel{
     var $belongsTo = array(
         'Series' => array(
             'className' => 'Serie',
+            'foreignKey'=>'serie_id'
         ),
         
     );
     
     
     var $hasMany = array(
-        'Informacao' => array(
+        'Informacoes' => array(
             'className' => 'Informacao',
         ),
     );
