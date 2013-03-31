@@ -60,14 +60,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
             <div class="row-fluid">
                 <div class="span12 header">
                     <div class="navbar">
-                        <div class="navbar-inner">
-                            <a class="brand" href="#">Title</a>
-                            <ul class="nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#">Link</a></li>
-                            </ul>
-                        </div>
+                        <?php echo $this->element('Admin/menu-top'); ?>
                     </div>
                 </div>
             </div>
