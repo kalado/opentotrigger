@@ -163,7 +163,7 @@ class AnimeController extends AppController{
         if(!empty($serie_id)){
             $this->redirect(array('controller' => 'serie','action' => 'edit',$serie_id));            
         }
-        $this->redirect(array('controller' => 'edit','action' => 'lista',$serie_id));
+        $this->redirect(array('controller' => 'anime','action' => 'lista',$serie_id));
     }
     
 }
