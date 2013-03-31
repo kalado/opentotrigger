@@ -3,12 +3,18 @@ class Topico extends AppModel{
     var $name = "Topico";
     
     var $belongsTo = array(
-        'Serie' => array(
+        'Series' => array(
             'className' => 'Serie',
         ),
         
     );
     
+    
+    var $hasMany = array(
+        'Informacao' => array(
+            'className' => 'Informacao',
+        ),
+    );
     
 }
 ?>
