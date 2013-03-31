@@ -6,6 +6,11 @@ class Serie extends AppModel{
        'Autoria' => array(
             'className' => 'Autor',
             'joinTable' => 'autoria_serie',
+        ),
+        'Generos' => array(
+            'className' => 'Genero',
+            'joinTable' => 'series_generos',
+            'foreignKey'=>'serie_id'
         )
     );
     
@@ -23,20 +28,11 @@ class Serie extends AppModel{
     
     
     public function afterSave( $created ){
-        $id = $this->getInsertID();
-        if(empty($id))$id=$this->data[$this->name]['id'];
         
-        foreach($this->data[$this->name]['autores'] as $autor){
-            $valores[] = '('.$autor.','.$id.')';
-        }
-        $this->query(
-                    'DELETE FROM autoria_serie '.
-                        'WHERE series_id='.$id.
-                    ';'.
-                    'INSERT INTO autoria_serie '.
-                        'VALUES '.
-                            implode(",", $valores).
-                        ' ;');
+        $this->gerarLigacoesNovas( 'autoria_serie' , "series_id", $this->data[$this->name]['autores']);
+        
+        $this->gerarLigacoesNovas( 'series_generos' , "serie_id", $this->data[$this->name]['generos'], FALSE);
+        
     }
     
     
@@ -48,6 +44,16 @@ class Serie extends AppModel{
                         ' ;');
         
         return $autores;
+    }
+    
+    public function getGeneros($id){
+        $generos = $this->query(
+                    'SELECT * FROM series_generos AS Generos '.
+                        'WHERE '.
+                            'Generos.serie_id='.$id.
+                        ' ;');
+        
+        return $generos;
     }
     
     
