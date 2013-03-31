@@ -47,12 +47,15 @@ class Anime extends AppModel{
     
     
     public function afterSave( $created ){
+        $return = parent::afterSave($created);
         
         $this->gerarLigacoesNovas('autoria_anime', 'anime_id', $this->data[$this->name]['autores'] );
         
         $this->gerarLigacoesNovas('fansub_animes', 'anime_id', $this->data[$this->name]['fansubs'] );
         
         $this->gerarLigacoesNovas('animes_generos', 'anime_id', $this->data[$this->name]['generos'] , FALSE );
+        
+        return $return;
     }
     
     public function getAutores($id){

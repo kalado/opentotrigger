@@ -28,10 +28,13 @@ class Serie extends AppModel{
     
     
     public function afterSave( $created ){
+        $return = parent::afterSave($created);
         
         $this->gerarLigacoesNovas( 'autoria_serie' , "series_id", $this->data[$this->name]['autores']);
         
         $this->gerarLigacoesNovas( 'series_generos' , "serie_id", $this->data[$this->name]['generos'], FALSE);
+        
+        return $return;
         
     }
     

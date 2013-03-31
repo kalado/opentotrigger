@@ -30,19 +30,11 @@ class Multimidia extends AppModel{
     
     
     public function afterSave( $created ){
-        $id = $this->getInsertID();
-        if(empty($id))$id=$this->data[$this->name]['id'];
-        foreach($this->data[$this->name]['formatos_aceitos'] as $qualidade){
-            $valores[] = '('.$qualidade.','.$id.')';
-        }
-        $this->query(
-                    'DELETE FROM compativel '.
-                        'WHERE multimidia_id='.$id.
-                    ';'.
-                    'INSERT INTO compativel '.
-                        'VALUES '.
-                            implode(",", $valores).
-                        ' ;');
+        $return = parent::afterSave($created);
+        
+        $this->gerarLigacoesNovas("compativel",'multimidia_id' , $this->data[$this->name]['formatos_aceitos']);
+        
+        return $returnn;
     }
     
     public function getQualidadesAceitas($id){
