@@ -50,7 +50,7 @@ class AppController extends Controller {
                         'Serie',
                         'Servidor',
                         'Status',
-                        'Tipoco',
+                        'Topico',
                         'UsuarioTipo',
                         'Usuario',
                      );
