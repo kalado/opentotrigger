@@ -87,7 +87,14 @@ class MenusComponent extends Component{
         
         $topicos = $this->Topico->find('all',array('conditions'=>array('Topico.serie_id'=>$serie_id)));
         
-        //print_r($topicos);exit;
+        $menu_noticias = array();
+        foreach($topicos as $topico){
+            $menu_noticias[] =
+                    array(
+                        'nome' => $topico['Topico']['nome'],
+                        'noticias' => $topico['Informacoes']
+                    );
+        }
         
         //Noticias (serie_nome)
         //Novo Tópico
@@ -108,9 +115,24 @@ class MenusComponent extends Component{
         return array(
             "menu_noticiasSerie_nome" => $this->Serie->getField($serie_id,'nome'),
             "meni_noticias_serie_id"=> $serie_id,
-            "menu_noticias" => $topicos,
+            "menu_noticias" => $menu_noticias,
         );
-        
+    }
+    
+    
+    function MenuTopADMIN($parte,$id){
+        switch ($parte) {
+            case 'anime':
+                $this->ModelRegistre('Anime');
+                $this->set(array(
+                                'menu_top_anime_id' =>$id,
+                                'menu_top_anime_nome' =>$this->Anime->getField($id,'nome')
+                            ));
+                break;
+
+            default:
+                break;
+        }
     }
 }
 ?>
