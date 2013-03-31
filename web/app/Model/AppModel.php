@@ -155,4 +155,48 @@ class AppModel extends Model{
         return $this->inverterdata($data);
     }
     
+    
+    function gerarLigacoesNovas($tabela,$campo,$ligacoes,$ordem_valor_id = TRUE){
+        if(empty($ligacoes)){
+            return FALSE;
+        }
+        
+        //print_r($ligacoes);exit;
+        
+        
+        $id = $this->getInsertID();
+        if(empty($id))$id=$this->data[$this->name]['id'];
+        $valores = array();
+        if($ordem_valor_id==TRUE){
+            foreach($ligacoes as $valor){
+                $valores[] = '('.$valor.','.$id.')';
+            }
+        }else{
+            foreach($ligacoes as $valor){
+                $valores[] = '('.$id.','.$valor.')';
+            }
+        }
+        
+        
+        $sql =
+                    'DELETE FROM '.$tabela.' '.
+                        'WHERE '.$campo.'='.$id.
+                    ';'.
+                    'INSERT INTO '.$tabela.' '.
+                        'VALUES '.
+                            implode(",", $valores).
+                        ' ;';
+                //print_r($sql);
+                //echo "<br><br><br><br>";
+        
+        $this->query(
+                    'DELETE FROM '.$tabela.' '.
+                        'WHERE '.$campo.'='.$id.
+                    ';'.
+                    'INSERT INTO '.$tabela.' '.
+                        'VALUES '.
+                            implode(",", $valores).
+                        ' ;');
+    }
+    
 }
