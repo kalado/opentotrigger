@@ -37,9 +37,11 @@ class AppModel extends Model{
     var $dataFields = array();
     
     public function beforeSave($options = array()){
-        parent::beforeSave($options);
+        $return = parent::beforeSave($options);
         
         $this->data = $this->tratarDataRegistro($this->data);
+        
+        return $return;
     }
     
     public function find( $type = 'first' , $query = array() ){
