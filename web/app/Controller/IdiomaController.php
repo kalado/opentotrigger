@@ -25,7 +25,7 @@ class IdiomaController extends AppController{
         }
         
         if($id != ""){
-            $this->request->data = $this->Idioma->find('first',array('conditions' => array('id' => $id) , 'fields'=>array('id','nome','sigla')));
+            $this->request->data = $this->Idioma->find('first',array('conditions' => array('id' => $id)));
         }
         
         if($id!=NULL)$this->page_title = $this->Idioma->getField($id,'nome');
