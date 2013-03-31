@@ -6,6 +6,7 @@ class Serie extends AppModel{
        'Autoria' => array(
             'className' => 'Autor',
             'joinTable' => 'autoria_serie',
+            'foreignKey'=>'serie_id'
         ),
         'Generos' => array(
             'className' => 'Genero',
@@ -17,6 +18,7 @@ class Serie extends AppModel{
     var $hasMany = array(
         'Topicos' => array(
             'className' => 'Topico',
+            'foreignKey'=>'serie_id'
         ),
     );
     
@@ -30,7 +32,7 @@ class Serie extends AppModel{
     public function afterSave( $created ){
         $return = parent::afterSave($created);
         
-        $this->gerarLigacoesNovas( 'autoria_serie' , "series_id", $this->data[$this->name]['autores']);
+        $this->gerarLigacoesNovas( 'autoria_serie' , "serie_id", $this->data[$this->name]['autores']);
         
         $this->gerarLigacoesNovas( 'series_generos' , "serie_id", $this->data[$this->name]['generos'], FALSE);
         
@@ -43,7 +45,7 @@ class Serie extends AppModel{
         $autores = $this->query(
                     'SELECT * FROM autoria_serie AS Autores '.
                         'WHERE '.
-                            'Autores.series_id='.$id.
+                            'Autores.serie_id='.$id.
                         ' ;');
         
         return $autores;
