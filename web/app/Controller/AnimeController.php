@@ -56,13 +56,9 @@ class AnimeController extends AppController{
         }
         if($id!=NULL){
             $this->page_title = $this->Anime->getField($id,'nome');
+            $this->set($this->Menus->MenuTopADMIN('anime',$id));
+
         }else{
-            /**
-             * Nesse caso (um novo anime) os autores vem como os mesmos da série (pode ser mudado)
-             **/
-            /*
-             * No caso de um anime novo, o editor vem com os autores padrões da série
-             */
             $autores = $this->Serie->getAutores($id_serie);
             if(!empty($autores) ){
                 foreach ( $autores as $autor){
@@ -82,6 +78,8 @@ class AnimeController extends AppController{
                 $genero_final = array();
             }
             $this->request->data['Anime']['generos'] =  array_map("intval", $genero_final);
+            
+            $this->set($this->Menus->MenuTopADMIN('serie',$id_serie));
         }
         $fildset = (($id==NULL)?"Novo Material":"Editar ".$this->data['Multimidia']['nome']);
         $campos = array(

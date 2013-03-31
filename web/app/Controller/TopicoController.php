@@ -55,7 +55,7 @@ class TopicoController extends AppController{
             
             $this->set($this->Menus->MenuSerieADMIN($serie_id));
             $this->set($this->Menus->MenuNoticiasSerieADMIN($serie_id));
-            
+            $this->set($this->Menus->MenuTopADMIN('serie',$id_serie));            
     }
     
     public function novo($serie_id){

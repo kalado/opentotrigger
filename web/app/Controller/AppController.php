@@ -112,11 +112,24 @@ class AppController extends Controller {
                                             // legenda
                                             // controller | nome
         $this->set( 'all_pages_menus' , $this->Menus->MenuEsquerdaADMIN());
-        $this->set( 'current_page' , $this->request->params['controller']);
+        $this->set( 'current_page' , $this->subPages($this->request->params['controller']));
                 
     }
     
-    
+    private function subPages($pagina){
+        $pagina = strtolower($pagina);
+        $subPaginas = array(
+                            'anime'=>'serie',
+                            'topico'=>'serie',
+                            'informacao','serie'
+                            );
+        if(isset($subPaginas[$pagina])){
+            return $subPaginas[$pagina];
+        }
+        return $pagina;
+    }
+
+
     /**
      * 
      * Funções básicas:

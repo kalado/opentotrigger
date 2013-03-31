@@ -53,6 +53,7 @@ class InformacaoController extends AppController{
             
             $this->set($this->Menus->MenuSerieADMIN($serie_id));
             $this->set($this->Menus->MenuNoticiasSerieADMIN($serie_id));
+            $this->set($this->Menus->MenuTopADMIN('serie',$serie_id));
     }
     
     public function novo($serie_id){
