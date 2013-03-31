@@ -47,51 +47,15 @@ class Anime extends AppModel{
     
     
     public function afterSave( $created ){
-        $id = $this->getInsertID();
-        if(empty($id))$id=$this->data[$this->name]['id'];
         
-        foreach($this->data[$this->name]['autores'] as $autor){
-            $valores[] = '('.$autor.','.$id.')';
-        }
-        $this->query(
-                    'DELETE FROM autoria_anime '.
-                        'WHERE anime_id='.$id.
-                    ';'.
-                    'INSERT INTO autoria_anime '.
-                        'VALUES '.
-                            implode(",", $valores).
-                        ' ;');
+        $this->gerarLigacoesNovas('autoria_anime', 'anime_id', $this->data[$this->name]['autores'] );
         
+        $this->gerarLigacoesNovas('fansub_animes', 'anime_id', $this->data[$this->name]['fansubs'] );
         
-        foreach($this->data[$this->name]['fansubs'] as $fansub){
-            $fansubs[] = '('.$fansub.','.$id.')';
-        }
-        $this->query(
-                    'DELETE FROM fansub_animes '.
-                        'WHERE anime_id='.$id.
-                    ';'.
-                    'INSERT INTO fansub_animes '.
-                        'VALUES '.
-                            implode(",", $fansubs).
-                        ' ;');
-        
-        
-        foreach($this->data[$this->name]['generos'] as $genero){
-            $fansubs[] = '('.$id.','.$genero.')';
-        }
-        $this->query(
-                    'DELETE FROM animes_generos '.
-                        'WHERE anime_id='.$id.
-                    ';'.
-                    'INSERT INTO animes_generos '.
-                        'VALUES '.
-                            implode(",", $fansubs).
-                        ' ;');
-        
-        
+        $this->gerarLigacoesNovas('animes_generos', 'anime_id', $this->data[$this->name]['generos'] , FALSE );
     }
     
-        public function getAutores($id){
+    public function getAutores($id){
         $autores = $this->query(
                     'SELECT * FROM autoria_anime AS Autores '.
                         'WHERE '.
@@ -101,6 +65,14 @@ class Anime extends AppModel{
         return $autores;
     }
     
-    
+    public function getGeneros($id){
+        $generos = $this->query(
+                    'SELECT * FROM animes_generos AS Generos '.
+                        'WHERE '.
+                            'Generos.anime_id='.$id.
+                        ' ;');
+        
+        return $generos;
+    }
 }
 ?>
