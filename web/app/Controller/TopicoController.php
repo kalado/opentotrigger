@@ -1,22 +1,22 @@
 <?php
-class IdiomaController extends AppController{
+class TopicoController extends AppController{
     
     /**
-     * Adiciona ou Edita um novo idioma
+     * Adiciona ou Edita um novo topico
      */
-    private function save($id=NULL){
+    private function save($id=NULL , $serie_id=NULL){
         if(!empty($this->request->data)){
-            $save = $this->Idioma->save($this->request->data);
+            $save = $this->Topico->save($this->request->data);
             if($save!==FALSE){
-                $this->Session->setFlash("O idioma foi salvo com sucesso!", 'alert', array(
+                $this->Session->setFlash("O topico foi salvo com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));
-                $id = $this->Idioma->getInsertID();
-                $id = ((empty($id))?$this->request->data['Idioma']['id']:$id); 
+                $id = $this->Topico->getInsertID();
+                $id = ((empty($id))?$this->request->data['Topico']['id']:$id); 
                 $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
             }else{
-                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o idioma, favor conferir os dados e tentar novamente!", 'alert', array(
+                $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o topico, favor conferir os dados e tentar novamente!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));
@@ -25,31 +25,34 @@ class IdiomaController extends AppController{
         }
         
         if($id != ""){
-            $this->request->data = $this->Idioma->find('first',array('conditions' => array('id' => $id) , 'fields'=>array('id','nome','sigla')));
+            $this->request->data = $this->Topico->find('first',array('conditions' => array('id' => $id) ));
         }
-        
-        if($id!=NULL)$this->page_title = $this->Idioma->getField($id,'nome');
-        $fildset = (($id==NULL)?"Novo idioma":"Editar idioma");
+        if(!empty($serie_id)){
+            $this->request->data['Topico']['serie_id'] = $serie_id;
+        }
+        if($id!=NULL)$this->page_title = $this->Topico->getField($id,'nome');
+        $fildset = (($id==NULL)?"Novo topico":"Editar topico");
         
         $campos = array(
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
+                    'serie_id' => array('type'=>'hidden'),
                     'nome' => array('label'=>'Nome'),
-                    'sigla' => array(),
+                    'idioma_id' => array('label'=>'Idioma','type'=>'select','options'=>$this->Idioma->getArraySimples('nome')),
                 )
             );
         
             $this->set(
                         array(
-                            'model' => 'Idioma',
+                            'model' => 'Topico',
                             'campos' => $campos
                             )
                     );
     }
     
-    public function novo(){
+    public function novo($serie_id){
         $this->beforeAdmin();
-        $this->save();
+        $this->save(NULL,$serie_id);
         $this->render('save');
     }
     
@@ -63,10 +66,10 @@ class IdiomaController extends AppController{
     
     public function lista(){
         $this->beforeAdmin();
-        $lista = $this->getPaginate('Idioma', array('Idioma.nome') , array('id','nome','sigla'));
+        $lista = $this->getPaginate('Topico', array('Topico.nome') , array('id','nome','sigla'));
         $this->set(
                 array(
-                    'fields' => array('#'=>'Idioma.id','Nome'=>'Idioma.nome' , 'Sigla' => 'Idioma.sigla'),
+                    'fields' => array('#'=>'Topico.id','Nome'=>'Topico.nome' , 'Sigla' => 'Topico.sigla'),
                     'data' => $lista,
                     'virtualFields' => array(),
                 )
@@ -75,15 +78,15 @@ class IdiomaController extends AppController{
     
     public function delete($id){
         $this->beforeAdmin();
-        $nome = $this->Idioma->getField($id,'nome');
-        $deletado = $this->Idioma->delete($id);
+        $nome = $this->Topico->getField($id,'nome');
+        $deletado = $this->Topico->delete($id);
         if($deletado==TRUE){
-            $this->Session->setFlash("O idioma (".$nome.") foi deletado com sucesso!", 'alert', array(
+            $this->Session->setFlash("O topico (".$nome.") foi deletado com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));            
         }else{
-            $this->Session->setFlash("O idioma (".$nome.") não pode ser deletado!", 'alert', array(
+            $this->Session->setFlash("O topico (".$nome.") não pode ser deletado!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
                 ));            
