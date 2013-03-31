@@ -24,7 +24,7 @@ class SerieController extends AppController{
             }
         }
         if($id != ""){
-            $this->request->data = $this->Serie->find('first',array('conditions' => array($this->name.'.id' => $id) , 'fields'=>array('id','nome','sinopse','status_id')));
+            $this->request->data = $this->Serie->find('first',array('conditions' => array($this->name.'.id' => $id) ));
             if(!empty ($this->request->data['Autoria'])){
                 foreach ( $this->request->data['Autoria'] as $autor){
                     $autores[] = $autor['id'];
@@ -33,6 +33,20 @@ class SerieController extends AppController{
                 $autores = array();
             }
             $this->request->data['Serie']['autores'] = array_map("intval", $autores);
+            
+            
+            
+            if(!empty ($this->request->data['Generos'])){
+                foreach ( $this->request->data['Generos'] as $genero){
+                    $generos[] = $genero['id'];
+                }
+            }else{
+                $generos = array();
+            }
+            $this->request->data['Serie']['generos'] = array_map("intval", $generos);
+            
+            
+            
             $this->set($this->Menus->MenuSerieADMIN($id));
         }
         if($id!=NULL)$this->page_title = $this->Serie->getField($id,'nome');
@@ -44,6 +58,7 @@ class SerieController extends AppController{
                     'sinopse' => array('type'=>'textarea-editor'),
                     'status_id' => array('label'=>'Status','type'=>'select','options'=>$this->Status->getArraySimples('nome'),'class'=>'input-block-level'),
                     'autores' => array('label'=>'Autores' , 'type'=>'checkbox-inline', 'options' => $this->Autor->getArraySimples('nome')),
+                    'generos' => array('label'=>'Generos' , 'type'=>'checkbox-inline', 'options' => $this->Genero->getArraySimples('nome')),
                 )
             );
         
