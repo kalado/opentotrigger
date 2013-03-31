@@ -21,6 +21,11 @@
     <?php echo $this->element("Admin/menu-serie"); ?>
 <? } ?>
 
+<?php if(isset($menu_noticias)){ ?>
+    <?php echo $this->element("Admin/menu-noticias"); ?>
+<? } ?>
+
+
 <?php if(isset($menu_capitulos)){ ?>
     <?php echo $this->element("Admin/menu-capitulos"); ?>
 <? } ?>
