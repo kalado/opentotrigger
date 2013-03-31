@@ -43,13 +43,16 @@ class AppController extends Controller {
                         'Fansub',
                         'Genero',
                         'Idioma',
+                        'Informacao',
                         'Link',
                         'Multimidia',
                         'Qualidade',
                         'Serie',
                         'Servidor',
                         'Status',
+                        'Tipoco',
                         'UsuarioTipo',
+                        'Usuario',
                      );
     
     var $components = array(
