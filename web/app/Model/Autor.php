@@ -6,7 +6,7 @@ class Autor extends AppModel{
         'Series' => array(
             'className' => 'Serie',
             'joinTable' => 'autoria_serie',
-        //    'associationForeignKey'=>'serie_id'
+            'associationForeignKey'=>'serie_id'
         ),
         'Animes' => array(
             'className' => 'Anime',

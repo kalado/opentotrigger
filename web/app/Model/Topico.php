@@ -3,9 +3,9 @@ class Topico extends AppModel{
     var $name = "Topico";
     
     var $belongsTo = array(
-        'Series' => array(
+        'Serie' => array(
             'className' => 'Serie',
-            'foreignKey'=>'serie_id'
+            //'foreignKey'=>'serie_id'
         ),
         
     );
