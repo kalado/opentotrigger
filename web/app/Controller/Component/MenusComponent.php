@@ -122,17 +122,35 @@ class MenusComponent extends Component{
     
     function MenuTopADMIN($parte,$id){
         switch ($parte) {
+            case 'serie':
+                $this->ModelRegistre('Serie');
+                $retorno = array(
+                                'menu_top_serie_id' =>$id,
+                                'menu_top_serie_nome' =>$this->Serie->getField($id,'nome')
+                                );
+                break;
             case 'anime':
                 $this->ModelRegistre('Anime');
-                $this->set(array(
+                $retorno = array_merge(array(
                                 'menu_top_anime_id' =>$id,
                                 'menu_top_anime_nome' =>$this->Anime->getField($id,'nome')
-                            ));
+                            ),
+                            $this->MenuTopADMIN('serie', $this->Anime->getField($id,'serie_id'))
+                        );
                 break;
-
+            case 'capitulo':
+                $this->ModelRegistre('Capitulo');
+                $retorno = array_merge(array(
+                                'menu_top_capitulo_id' =>$id,
+                                'menu_top_capitulo_nome' =>$this->Capitulo->getField($id,'nome')
+                            ),
+                            $this->MenuTopADMIN('anime', $this->Capitulo->getField($id,'anime_id'))
+                        );
+                break;
             default:
                 break;
         }
+        return $retorno;
     }
 }
 ?>
