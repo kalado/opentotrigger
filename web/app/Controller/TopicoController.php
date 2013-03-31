@@ -25,10 +25,12 @@ class TopicoController extends AppController{
         }
         
         if($id != ""){
-            $this->request->data = $this->Topico->find('first',array('conditions' => array('id' => $id) ));
+            $this->request->data = $this->Topico->find('first',array('conditions' => array($this->name.'.id' => $id) ));
         }
         if(!empty($serie_id)){
             $this->request->data['Topico']['serie_id'] = $serie_id;
+        }else{
+            $serie_id = $this->request->data['Topico']['serie_id'];
         }
         if($id!=NULL)$this->page_title = $this->Topico->getField($id,'nome');
         $fildset = (($id==NULL)?"Novo topico":"Editar topico");
@@ -48,6 +50,12 @@ class TopicoController extends AppController{
                             'campos' => $campos
                             )
                     );
+            
+            
+            
+            $this->set($this->Menus->MenuSerieADMIN($serie_id));
+            $this->set($this->Menus->MenuNoticiasSerieADMIN($serie_id));
+            
     }
     
     public function novo($serie_id){

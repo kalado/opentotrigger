@@ -48,6 +48,8 @@ class SerieController extends AppController{
             
             
             $this->set($this->Menus->MenuSerieADMIN($id));
+            $this->set($this->Menus->MenuNoticiasSerieADMIN($id));
+            
         }
         if($id!=NULL)$this->page_title = $this->Serie->getField($id,'nome');
         $fildset = (($id==NULL)?"Nova Serie":"Editar Serie");
