@@ -15,14 +15,13 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+if(!isset($title_for_layout))$title_for_layout = "Anime-Trigger - Administrativo";
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <?php echo $this->Html->charset(); ?>
         <title>
-            <?php echo $cakeDescription ?>:
             <?php echo $title_for_layout; ?>
         </title>
         <?php
