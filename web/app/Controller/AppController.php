@@ -106,14 +106,14 @@ class AppController extends Controller {
     
     
 
-    function beforeAdmin(){
+    function beforeAdmin($permissao){
         $this->layout = 'admin';
         
-                                            // legenda
-                                            // controller | nome
+        $this->redirecionaSeNaoTiverPermissao(1);
+        
         $this->set( 'all_pages_menus' , $this->Menus->MenuEsquerdaADMIN());
         $this->set( 'current_page' , $this->subPages($this->request->params['controller']));
-                
+        
     }
     
     private function subPages($pagina){
@@ -142,7 +142,6 @@ class AppController extends Controller {
      */
     function beforeBasicos(){
         $this->gerarPermissoes();
-        
     }
     
     
@@ -150,6 +149,9 @@ class AppController extends Controller {
      * Verifica se o usuário logado tem apermissão mínima.
      */
     function verificarPermissao($permissaoMinima){
+        
+        return TRUE;
+        
         if($permissaoMinima >= $this->getPermissaoUsuarioLogado()){
             return TRUE;
         }else{
@@ -160,8 +162,7 @@ class AppController extends Controller {
     function redirecionaSeNaoTiverPermissao($permissaoMinima){
         if($this->verificarPermissao($permissaoMinima)){
             //não redireciona
-        }else{
-            //redireciona
+            $this->redirect(array('controller' => 'index', 'action' => 'login' ));   
         }
     }
 
@@ -188,7 +189,9 @@ class AppController extends Controller {
         return $this->paginate();
     }
 
-
+    function isLogin() {
+        return ($this->getPermissaoUsuarioLogado() >= 0);
+    }
     
     
     
@@ -201,10 +204,10 @@ class AppController extends Controller {
     }
     
     private function getPermissaoUsuarioLogado(){
-        
+        return -1;
     }
     
-    
+
     
     /**
      * 
