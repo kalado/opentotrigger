@@ -106,7 +106,7 @@ class AppController extends Controller {
     
     
 
-    function beforeAdmin($permissao){
+    function beforeAdmin($permissao = 1){
         $this->layout = 'admin';
         
         $this->redirecionaSeNaoTiverPermissao(1);
