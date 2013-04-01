@@ -1,2 +1,21 @@
-.header{
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    background: url(./images/bg.jpg);
+}
+
+.bg-mascara{
+    background: url(./images/bg-mascara.png);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    position: absolute;
+    z-index: 1;
+}
+
+
+.form-login{
+    margin-top: 80px;
 }
