@@ -1,0 +1,2 @@
+<h1>Login</h1>
+<?php echo $this->FormGen->gerarFormulario('Login',array('class'=>'horizontal' , 'url' => array('controller' => 'index', 'action' => 'login')), $campos , array('label'=>"Login" , 'class'=>"btn btn-primary")); ?>
