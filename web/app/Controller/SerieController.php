@@ -7,16 +7,29 @@ class SerieController extends AppController{
     
     private function save($id=NULL){
         if(!empty($this->request->data)){
+            $id = ((empty($id))?FALSE:$id); 
+            if($id!=FALSE){
+                $foto = $this->Serie->getField($id,'imagem');
+                $this->request->data['Serie']['imagem'] = $this->Arquivo->upload($this->name);
+            }else{
+                $this->request->data['Serie']['imagem'] = $this->Arquivo->upload($this->name);
+                $foto = $this->request->data['Serie']['imagem'];
+            }
+            
             $save = $this->Serie->save($this->request->data);
             if($save!==FALSE){
+                if($id!=false){
+                    $this->Arquivo->deletar($foto);
+                }
                 $this->Session->setFlash("A serie foi salva com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));
                 $id = $this->Serie->getInsertID();
-                $id = ((empty($id))?$this->request->data['Serie']['id']:$id); 
+                $id = (($id == false)?$this->request->data['Serie']['id']:$id); 
                 $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
             }else{
+                $this->Arquivo->deletar($foto);
                 $this->Session->setFlash("Ocorreu um erro na tentativa de salvar a serie, favor conferir os dados e tentar novamente!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-error'
@@ -58,6 +71,7 @@ class SerieController extends AppController{
                     'id' => array('type'=>'hidden'),
                     'nome' => array('required'=>TRUE , 'class'=>'input-block-level'),
                     'sinopse' => array('type'=>'textarea-editor'),
+                    'imagem' => array( 'type'=>'file' , 'class'=>'input-block-level'),
                     'status_id' => array('label'=>'Status','type'=>'select','options'=>$this->Status->getArraySimples('nome'),'class'=>'input-block-level'),
                     'autores' => array('label'=>'Autores' , 'type'=>'checkbox-inline', 'options' => $this->Autor->getArraySimples('nome')),
                     'generos' => array('label'=>'Generos' , 'type'=>'checkbox-inline', 'options' => $this->Genero->getArraySimples('nome')),

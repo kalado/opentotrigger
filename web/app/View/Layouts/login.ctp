@@ -32,8 +32,6 @@ if(!isset($title_for_layout))$title_for_layout = "Anime-Trigger - Login";
                 'bootstrap',
                 'bootstrap-responsive',
                 'datepicker',
-                'basicos',
-                'default',
             )
         );
         echo $this->Html->script(array(
@@ -50,6 +48,13 @@ if(!isset($title_for_layout))$title_for_layout = "Anime-Trigger - Login";
         echo $this->fetch('css');
         echo $this->fetch('script');
         ?>
+        
+        <style>
+            .form-login{
+                    margin-top: 80px;
+                }
+        </style>
+        
     </head>
     <body>
         <div id="container" class="container-fluid">

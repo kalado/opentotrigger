@@ -56,6 +56,7 @@ class AppController extends Controller {
                      );
     
     var $components = array(
+                        'Arquivo',
                         // nativos do cake
                         'Session',
                         'RequestHandler',
@@ -142,16 +143,25 @@ class AppController extends Controller {
      */
     function beforeBasicos(){
         $this->gerarPermissoes();
+        
+        
+        
+        $this->setBasicos();
+        
     }
     
+    private function setBasicos() {
+        $this->set(
+                    array(
+                        'titulo_do_site' => 'Anime-Trigger'
+                    )
+                );
+    }
     
     /**
      * Verifica se o usuário logado tem apermissão mínima.
      */
     function verificarPermissao($permissaoMinima){
-        
-        return TRUE;
-        
         if($permissaoMinima >= $this->getPermissaoUsuarioLogado()){
             return TRUE;
         }else{
@@ -204,7 +214,7 @@ class AppController extends Controller {
     }
     
     private function getPermissaoUsuarioLogado(){
-        return -1;
+        return 10;
     }
     
 

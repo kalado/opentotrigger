@@ -27,7 +27,7 @@
 		echo $this->Html->css(array(
                 //'cake.generic',
                 'bootstrap',
-                'bootstrap-responsive',
+                //'bootstrap-responsive',
                 'datepicker',
                 'basicos',
                 'default',
@@ -49,6 +49,20 @@
 	?>
 </head>
     <body>
-        <div class="bg-mascara"></div>
+    <div class="bg-mascara">
+        <div class="container">
+            <div class="row">
+                <div class="offset1 span10 header">
+                    <div class="row-fluid">
+                    <?php echo $this->element('Front/header'); ?>
+                    </div>
+                </div>
+                <div class="offset1 span10 corpo">
+                    <?php echo $this->fetch('content'); ?>
+                </div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
     </body>
 </html>

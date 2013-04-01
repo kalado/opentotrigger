@@ -1,5 +1,5 @@
 <?php
-class ArquivosComponent extends Component{
+class ArquivoComponent extends Component{
       var $sub_diretorio;
       var $tabela;
       var $campo;//campo do form, não da tabela
@@ -8,18 +8,18 @@ class ArquivosComponent extends Component{
       private $destino;
       private $arquivo;
 
-      function ArquivosComponent(){
-            $this->diretorio_fixo= APP.WEBROOT_DIR.DS;
-            //$this->diretorio_fixo= APP.WEBROOT_DIR.DS."img".DS."files".DS;
+      function ArquivoComponent(){
+            //$this->diretorio_fixo= APP.WEBROOT_DIR.DS;
+            $this->diretorio_fixo= APP.WEBROOT_DIR.DS."img".DS."files".DS;
             $this->sub_diretorio = "";
-            $this->campo = "arquivo";
+            $this->campo = "imagem";
       }
 
        function upload($tabela = "" ,$campo = "",$sub_diretorio="", $descompactar = false){
             //se passar o subdiretorio como parametro ele tambem faz upload para esse subdiretorio
             $this->setBasicos($tabela,$campo,$sub_diretorio);
             $this->arquivo = $_FILES['data'];
-            //print_r($this->arquivo['name'][$this->tabela][$this->campo]);
+            //print_r($this->arquivo['name'][$this->tabela][$this->campo]);exit;
             if($this->arquivo['name'][$this->tabela][$this->campo] == ""){
                   return "";
             }

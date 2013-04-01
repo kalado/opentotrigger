@@ -32,8 +32,6 @@ if(!isset($title_for_layout))$title_for_layout = "Anime-Trigger - Administrativo
                 'bootstrap',
                 'bootstrap-responsive',
                 'datepicker',
-                'basicos',
-                'default',
             )
         );
         echo $this->Html->script(array(

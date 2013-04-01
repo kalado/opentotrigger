@@ -6,14 +6,27 @@ class AnimeController extends AppController{
      */
     private function save($id=NULL,$id_serie=NULL){
         if(!empty($this->request->data)){
+            
+            if($id!=FALSE){
+                $foto = $this->Anime->getField($id,'imagem');
+                $this->request->data['Anime']['imagem'] = $this->Arquivo->upload($this->name);
+            }else{
+                $this->request->data['Anime']['imagem'] = $this->Arquivo->upload($this->name);
+                $foto = $this->request->data['Anime']['imagem'];
+            }
+            
+            
             $save = $this->Anime->save($this->request->data);
             if($save!==FALSE){
+                if($id!=false){
+                    $this->Arquivo->deletar($foto);
+                }
                 $this->Session->setFlash("O anime foi salvo com sucesso!", 'alert', array(
                     'plugin' => 'TwitterBootstrap',
                     'class' => 'alert-success'
                 ));
                 $id = $this->Anime->getInsertID();
-                $id = ((empty($id))?$this->request->data['Anime']['id']:$id); 
+                $id = (($id==FALSE)?$this->request->data['Anime']['id']:$id); 
                 $this->redirect(array('controller' => $this->name, 'action' => 'edit' , $id ));
             }else{
                 $this->Session->setFlash("Ocorreu um erro na tentativa de salvar o anime, favor conferir os dados e tentar novamente!", "alert", array(
@@ -86,11 +99,11 @@ class AnimeController extends AppController{
                 $fildset => array(
                     'id' => array('type'=>'hidden'),
                     'serie_id' => array('type'=>'hidden','value'=>$id_serie),
-                    
                     'multimidia_id' => array('label'=>'Multimidia','type'=>'select','options'=>$this->Multimidia->getArraySimples('nome'),'class'=>'input-block-level'),
                     'nome' => array('required'=>TRUE , 'class'=>'input-block-level'),
                     'apelido' => array('class'=>'input-block-level'),
                     'sinopse' => array('type'=>'textarea-editor'),
+                    'imagem' => array( 'type'=>'file' , 'class'=>'input-block-level'),
                     ),
                 "Detalhes técnicos" => array(
                     'lancamento' => array('label'=>'Lançamento','class'=>'datePiker'),
