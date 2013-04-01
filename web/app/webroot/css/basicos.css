@@ -6,6 +6,13 @@ body{
     background: url(./images/bg.jpg);
     font-family: Verdana, sans-serif;
 }
+li{
+    list-style-type:none;
+}
+a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
 .hidden{
     display: none;
 }
@@ -23,7 +30,9 @@ body{
     height: 155px;
     cursor: pointer;
 }
-
+.no-overflow{
+    overflow: hidden;
+}
 
 
 
@@ -56,9 +65,6 @@ a.media-social{
     margin-top: 50px;
 }
 
-.menu li{
-    list-style-type:none;
-}
 
 .menu li a{
     font-size: 16px;
@@ -75,3 +81,52 @@ a.media-social{
 .seta-li-top{
     margin-top: 3px;
 }
+
+.animes-home{
+    margin-bottom: 50px
+}
+.borda-arredonda{
+    border-radius: 8px;
+}
+.imagem-anime{
+    height: 400px;
+}
+
+.fundo-amarelo{
+    background-color: #f8f6e5;
+}
+
+.resumo-anime{
+    height: 340px;
+    box-shadow: 2px 2px 4px darkgray;
+}
+
+.sinopse-anime{
+    height: 195px;
+}
+.continue{
+    color: #a73c3a;
+    margin-top: 31px;
+}
+a.continue:hover{
+    color: #a73c3a;
+}
+p.active{
+    color: a73c3a;
+    font-weight: bold;
+}
+.bg-dark{
+    background: url(./images/bg-dark.png);
+}
+.multimidias{
+    text-align: center;
+}
+.multimidias a{
+    padding-top: 4px;
+    display: block;
+    color: black;
+    min-height: 20px;
+}
+
+
+

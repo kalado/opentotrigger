@@ -51,7 +51,7 @@
     <body>
     <div class="bg-mascara">
         <div class="container">
-            <div class="row">
+            <div class="row-fluid">
                 <div class="offset1 span10 header">
                     <div class="row-fluid">
                     <?php echo $this->element('Front/header'); ?>

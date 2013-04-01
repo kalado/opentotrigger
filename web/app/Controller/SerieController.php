@@ -1,6 +1,22 @@
 <?php
 class SerieController extends AppController{
     
+    
+    
+    
+    public function index(){
+        $series = $this->Serie->find('all',array('order'=>array('Serie.nome')));
+        
+        $this->set(
+                
+                );
+        
+    }
+
+    
+
+
+
     /**
      * Adiciona ou Edita uma nova serie
      */

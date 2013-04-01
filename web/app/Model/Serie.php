@@ -20,6 +20,10 @@ class Serie extends AppModel{
             'className' => 'Topico',
             'foreignKey'=>'serie_id'
         ),
+        'Animes' => array(
+            'className' => 'Anime',
+            'foreignKey'=>'serie_id'
+        ),
     );
     
     var $belongsTo = array(

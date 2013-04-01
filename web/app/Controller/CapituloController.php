@@ -67,6 +67,7 @@ class CapituloController extends AppController{
             }
             if(!empty($this->request->data['Capitulo']['anime_id'])){
                 $this->set($this->Menus->MenuEpisodiosADMIN($this->request->data['Capitulo']['anime_id']));
+                $this->set($this->Menus->MenuTopADMIN('anime',$this->request->data['Capitulo']['anime_id']));
             }
     }
     
