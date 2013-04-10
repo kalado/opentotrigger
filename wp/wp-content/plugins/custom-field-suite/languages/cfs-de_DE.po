@@ -1,0 +1,416 @@
+# Copyright (C) 2012 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/custom-field-suite\n"
+"POT-Creation-Date: 2012-10-19 17:39:31+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-10-19 20:17+0100\n"
+"Last-Translator: Sascha Brosi <sascha.brosi@milizfeuerwehr.ch>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: cfs.php:86 cfs.php:403
+msgid "Field Groups"
+msgstr "Felder-Gruppen"
+
+#: cfs.php:87
+msgid "Field Group"
+msgstr "Felder-Gruppe"
+
+#: cfs.php:88
+msgid "Add New"
+msgstr "Erstellen"
+
+#: cfs.php:89
+msgid "Add New Field Group"
+msgstr "Neue Felder-Gruppe hinzufügen"
+
+#: cfs.php:90
+msgid "Edit Field Group"
+msgstr "Felder-Gruppe bearbeiten"
+
+#: cfs.php:91
+msgid "New Field Group"
+msgstr "Neue Felder-Gruppe"
+
+#: cfs.php:92
+msgid "View Field Group"
+msgstr "Felder-Gruppe anzeigen"
+
+#: cfs.php:93
+msgid "Search Field Groups"
+msgstr "Felder-Gruppe suchen"
+
+#: cfs.php:94
+msgid "No Field Groups found"
+msgstr "Keine Felder-Gruppen gefunden"
+
+#: cfs.php:95
+msgid "No Field Groups found in Trash"
+msgstr "Im Papierkorb keine Felder-Gruppen gefunden"
+
+#: cfs.php:123
+msgid "Title"
+msgstr "Titel"
+
+#: cfs.php:386
+msgid "Fields"
+msgstr "Felder"
+
+#: cfs.php:387
+msgid "Placement Rules"
+msgstr "Regeln"
+
+#: cfs.php:388
+msgid "Extras"
+msgstr "Extras"
+
+#: cfs.php:404
+msgid "Tools"
+msgstr "Werkzeuge"
+
+#: cfs.php:643
+msgid "Imported"
+msgstr "Importiert"
+
+#: cfs.php:647
+msgid "Skipped"
+msgstr "Übersprungen"
+
+#: cfs.php:652
+msgid "Nothing to import"
+msgstr "Nichts zum importieren"
+
+#: cfs.php:727
+msgid "No field groups selected"
+msgstr "Keine Felder-Gruppen ausgewählt"
+
+#: includes/actions/admin_footer.php:67
+msgid "Custom Field Suite"
+msgstr "Benutzerdefinierte Felder Suite"
+
+#: includes/actions/admin_footer.php:71
+msgid "Homepage"
+msgstr "Homepage"
+
+#: includes/actions/admin_footer.php:72
+msgid "User Guide"
+msgstr "Benutzerhandbuch"
+
+#: includes/actions/admin_footer.php:73
+msgid "Changelog"
+msgstr "Änderungsprotokoll"
+
+#: includes/actions/admin_footer.php:78
+msgid "Donate"
+msgstr "Spenden"
+
+#: includes/actions/admin_footer.php:79
+msgid "Rate the plugin"
+msgstr "Bewerte das Plugin"
+
+#: includes/admin/field_html.php:30
+msgid "Label"
+msgstr "Beschriftung"
+
+#: includes/admin/field_html.php:32
+msgid "The field label that editors will see."
+msgstr "Die Beschriftung des Feldes, welche die Redakteure sehen."
+
+#: includes/admin/field_html.php:39
+msgid "Name"
+msgstr "Name"
+
+#: includes/admin/field_html.php:42
+msgid ""
+"The field name is passed into get() to retrieve values. Use only lowercase "
+"letters, numbers, and underscores."
+msgstr ""
+"Der Feld-Name wird in get () übergeben, um Werte abzurufen. Verwende nur "
+"Kleinbuchstaben, Zahlen und Unterstriche."
+
+#: includes/admin/field_html.php:49
+msgid "Field Type"
+msgstr "Feldtyp"
+
+#: includes/admin/field_html.php:67
+msgid "Notes"
+msgstr "Anweisungen"
+
+#: includes/admin/field_html.php:69
+msgid "Notes for editors during data entry"
+msgstr "Hinweise für die Dateneingabe"
+
+#: includes/admin/field_html.php:82
+msgid "Close"
+msgstr "Schliessen"
+
+#: includes/admin/field_html.php:83
+msgid "or"
+msgstr "oder"
+
+#: includes/admin/field_html.php:83
+msgid "delete"
+msgstr "löschen"
+
+#: includes/admin/meta_box_extras.php:39
+msgid "Content Editor"
+msgstr "Inhalts-Editor"
+
+#: includes/admin/meta_box_extras.php:48
+msgid "Hide the content editor"
+msgstr "Blende den Inhalts-Editor aus"
+
+#: includes/admin/meta_box_extras.php:55
+msgid "Gravity Forms Integration"
+msgstr "Gravity Forms Integration"
+
+#: includes/admin/meta_box_extras.php:75
+msgid "Your Gravity Form and CFS field labels must match exactly!"
+msgstr ""
+"Die Gravity Form und CFS Feldbezeichnungen müssen exakt übereinstimmen!"
+
+#: includes/admin/meta_box_extras.php:79
+msgid "Please install"
+msgstr "Bitte installieren"
+
+#: includes/admin/meta_box_extras.php:79
+msgid "to use this feature"
+msgstr "um dieses Feature zu nutzen"
+
+#: includes/admin/meta_box_fields.php:60
+msgid "Add New Field"
+msgstr "Neues Feld hinzufügen"
+
+#: includes/admin/meta_box_rules.php:5
+msgid "equals"
+msgstr "ist gleich"
+
+#: includes/admin/meta_box_rules.php:6
+msgid "is not"
+msgstr "ist nicht gleich"
+
+#: includes/admin/meta_box_rules.php:78
+msgid "Leave blank to skip this rule"
+msgstr "Leer lassen, um diese Regel zu überspringen"
+
+#: includes/admin/meta_box_rules.php:87 includes/fields/relationship.php:89
+msgid "Post Types"
+msgstr "Artikel-Typ"
+
+#: includes/admin/meta_box_rules.php:118
+msgid "User Roles"
+msgstr "Benutzer-Rolle"
+
+#: includes/admin/meta_box_rules.php:149
+msgid "Posts"
+msgstr "Artikel"
+
+#: includes/admin/meta_box_rules.php:180
+msgid "Taxonomy Terms"
+msgstr "Taxonomie"
+
+#: includes/admin/meta_box_rules.php:211
+msgid "Page Template"
+msgstr "Seiten-Vorlage"
+
+#: includes/admin/page_tools.php:78 includes/admin/page_tools.php:101
+msgid "Export"
+msgstr "Export"
+
+#: includes/admin/page_tools.php:79 includes/admin/page_tools.php:126
+msgid "Import"
+msgstr "Import"
+
+#: includes/admin/page_tools.php:80 includes/admin/page_tools.php:151
+msgid "Synchronize"
+msgstr "Synchronisation"
+
+#: includes/admin/page_tools.php:81
+msgid "Debug"
+msgstr "Debug"
+
+#: includes/admin/page_tools.php:89
+msgid "Which field groups would you like to export?"
+msgstr "Welche Felder-Gruppen willst Du exportieren?"
+
+#: includes/admin/page_tools.php:118
+msgid "Paste the import code below. Existing field groups will be skipped."
+msgstr ""
+"Füge den Import-Code unten ein. Bestehende Felder-Gruppen werden "
+"übersprungen."
+
+#: includes/admin/page_tools.php:139
+msgid "CFS will attempt to import custom field values."
+msgstr ""
+"CFS wird versuchen, Werte für benutzerdefinierte Felder zu importieren."
+
+#: includes/admin/page_tools.php:164
+msgid "Your site uses the following software:"
+msgstr "Deine Seite benutzt folgende Software"
+
+#: includes/classes/field.php:21 includes/fields/text.php:9
+msgid "Text"
+msgstr "Eingabefeld"
+
+#: includes/classes/field.php:57 includes/fields/file.php:77
+#: includes/fields/relationship.php:106 includes/fields/select.php:125
+#: includes/fields/text.php:33 includes/fields/textarea.php:61
+#: includes/fields/true_false.php:44
+msgid "Validation"
+msgstr "Erforderlich?"
+
+#: includes/classes/field.php:66 includes/fields/file.php:86
+#: includes/fields/relationship.php:115 includes/fields/select.php:134
+#: includes/fields/text.php:42 includes/fields/textarea.php:70
+#: includes/fields/true_false.php:53
+msgid "This is a required field"
+msgstr "Dies ist ein Pflichtfeld"
+
+#: includes/fields/color/color.php:9
+msgid "Color"
+msgstr "Farbauswahl"
+
+#: includes/fields/date/date.php:9
+msgid "Date"
+msgstr "Datumsfeld"
+
+#: includes/fields/file.php:9
+msgid "File Upload"
+msgstr "Datei-Upload"
+
+#: includes/fields/file.php:45
+msgid "Add File"
+msgstr "Datei hinzufügen"
+
+#: includes/fields/file.php:46
+msgid "Remove"
+msgstr "Entfernen"
+
+#: includes/fields/file.php:56
+msgid "Return Value"
+msgstr "Rückgabewert"
+
+#: includes/fields/file.php:65
+msgid "File URL"
+msgstr "Datei-URL"
+
+#: includes/fields/file.php:66
+msgid "Attachment ID"
+msgstr "Datei-ID"
+
+#: includes/fields/file.php:117
+msgid "Use This File"
+msgstr "Diese Datei benutzen"
+
+#: includes/fields/file.php:170
+msgid "Attach file"
+msgstr "Dateien hinzufügen"
+
+#: includes/fields/loop.php:9
+msgid "Loop"
+msgstr "Schleife"
+
+#: includes/fields/loop.php:36
+msgid "Row Display"
+msgstr "Zeilenwerte anzeigen"
+
+#: includes/fields/loop.php:45
+msgid "Show the values by default"
+msgstr "Zeigt die Werte standardmssig an"
+
+#: includes/fields/loop.php:52
+msgid "Row Label"
+msgstr "Zeilenbeschriftung"
+
+#: includes/fields/loop.php:60 includes/fields/loop.php:91 includes/fields/loop.php:162
+msgid "Loop Row"
+msgstr "Kopfzeile"
+
+#: includes/fields/loop.php:67
+msgid "Button Label"
+msgstr "Schaltflächebeschriftung"
+
+#: includes/fields/loop.php:75 includes/fields/loop.php:117 includes/fields/loop.php:163
+msgid "Add Row"
+msgstr "Zeile hinzufügen"
+
+#: includes/fields/relationship.php:9
+msgid "Relationship"
+msgstr "Beziehung"
+
+#: includes/fields/relationship.php:90
+msgid "Limit posts to the following types"
+msgstr "Begrenzung der Artikel zu den folgenden Typen"
+
+#: includes/fields/select.php:9
+msgid "Select"
+msgstr "Auswahlfeld"
+
+#: includes/fields/select.php:93
+msgid "Choices"
+msgstr "Auswahlmöglichkeiten"
+
+#: includes/fields/select.php:94
+msgid "Enter one choice per line"
+msgstr "Eine Auswahlmöglichkeit pro Zeile"
+
+#: includes/fields/select.php:109
+msgid "Multi-select?"
+msgstr "Mehrere Werte auswählen?"
+
+#: includes/fields/select.php:118
+msgid "This is a multi-select field"
+msgstr "Dieses Feld erlaubt es, mehrere Werte auszuwählen"
+
+#: includes/fields/text.php:18 includes/fields/textarea.php:25
+msgid "Default Value"
+msgstr "Standardwert"
+
+#: includes/fields/textarea.php:9
+msgid "Textarea"
+msgstr "Mehrzeiliges-Eingabefeld"
+
+#: includes/fields/textarea.php:40 includes/fields/wysiwyg.php:34
+msgid "Formatting"
+msgstr "Formatierung"
+
+#: includes/fields/textarea.php:49
+msgid "None"
+msgstr "Keine"
+
+#: includes/fields/textarea.php:50
+msgid "Convert newlines to <br />"
+msgstr "Konvertiert Zeilenumbrüche zu <br />"
+
+#: includes/fields/true_false.php:9
+msgid "True / False"
+msgstr "Ja / Nein"
+
+#: includes/fields/true_false.php:28
+msgid "Message"
+msgstr "Nachricht"
+
+#: includes/fields/true_false.php:29
+msgid "The text beside the checkbox"
+msgstr "Der Text neben dem Kontrollkästchen"
+
+#: includes/fields/user.php:9
+msgid "User"
+msgstr "Benutzer"
+
+#: includes/fields/wysiwyg.php:9
+msgid "Wysiwyg Editor"
+msgstr "WYSIWYG-Editor"
+
+#: includes/fields/wysiwyg.php:43
+msgid "Default"
+msgstr "Standard"
+
+#: includes/fields/wysiwyg.php:44
+msgid "None (bypass filters)"
+msgstr "Keine (Bypass-Filter)"
