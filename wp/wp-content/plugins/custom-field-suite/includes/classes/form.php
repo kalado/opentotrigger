@@ -5,6 +5,7 @@ class cfs_form
     public $parent;
     public $used_types;
     public $assets_loaded;
+    public $session;
 
     /*--------------------------------------------------------------------------------------
     *
@@ -38,9 +39,7 @@ class cfs_form
 
     public function init()
     {
-        if ('' == session_id()) {
-            session_start();
-        }
+        $this->session = new cfs_session();
 
         // Save the form
         if (isset($_POST['cfs']['save']))
@@ -49,7 +48,8 @@ class cfs_form
             {
                 // Hash is used to handle multiple active edit pages
                 $hash = $_POST['cfs']['save_hash'];
-                $session = isset($_SESSION['cfs'][$hash]) ? $_SESSION['cfs'][$hash] : false;
+
+                $session = $this->session->get($hash);
 
                 if (empty($session))
                 {
@@ -95,7 +95,29 @@ class cfs_form
                 }
 
                 $options = array('format' => 'input', 'field_groups' => $field_groups);
-                $this->parent->save($field_data, $post_data, $options);
+
+                // Hook parameters
+                $hook_params = array(
+                    'field_data' => $field_data,
+                    'post_data' => $post_data,
+                    'options' => $options,
+                );
+
+                // Pre-save hook
+                do_action('cfs_pre_save_input', $hook_params);
+
+                // Save the input values
+                $hook_params['post_data']['ID'] = $this->parent->save(
+                    $field_data,
+                    $post_data,
+                    $options
+                );
+
+                // After-save hook
+                do_action('cfs_after_save_input', $hook_params);
+
+                // Delete expired sessions
+                $this->session->cleanup();
 
                 // Redirect public forms
                 if (true === $session['front_end']) {
@@ -104,7 +126,6 @@ class cfs_form
                         $redirect_url = $session['confirmation_url'];
                     }
 
-                    unset($_SESSION['cfs'][$hash]);
                     header('Location: ' . $redirect_url);
                     exit;
                 }
@@ -134,13 +155,9 @@ class cfs_form
         wp_enqueue_script('jquery');
         wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-sortable');
-        wp_enqueue_script('cfs-validation', $this->parent->url . '/assets/js/validation.js');
         wp_enqueue_script('tiptip', $this->parent->url . '/assets/js/tipTip/jquery.tipTip.js');
         wp_enqueue_style('tiptip', $this->parent->url . '/assets/js/tipTip/tipTip.css');
         wp_enqueue_style('cfs-input', $this->parent->url . '/assets/css/input.css');
-
-        // Allow for custom client-side field validators
-        do_action('cfs_custom_validation');
     }
 
 
@@ -157,15 +174,11 @@ class cfs_form
     {
     ?>
 
-<script>
-var CFS = {
-    'validators': {},
-    'get_field_value': {},
-    'loop_buffer': []
-};
-</script>
+<script src="<?php echo $this->parent->url; ?>/assets/js/validation.js"></script>
 
     <?php
+        // Allow for custom client-side field validators
+        do_action('cfs_custom_validation');
     }
 
 
@@ -237,7 +250,7 @@ var CFS = {
         $hash = md5(serialize($session_data));
 
         // Set the SESSION
-        $_SESSION['cfs'][$hash] = $session_data;
+        $this->session->set($hash, $session_data);
 
         if (false !== $params['front_end'])
         {
@@ -292,6 +305,13 @@ var CFS = {
             if (1 > (int) $field->parent_id)
             {
                 $validator = '';
+
+                if ('relationship' == $field->type)
+                {
+                    $min = empty($field->options['limit_min']) ? 0 : (int) $field->options['limit_min'];
+                    $max = empty($field->options['limit_max']) ? 0 : (int) $field->options['limit_max'];
+                    $validator = "limit|$min,$max";
+                }
 
                 if (isset($field->options['required']) && 0 < (int) $field->options['required'])
                 {

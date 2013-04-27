@@ -110,7 +110,7 @@ class AppController extends Controller {
     function beforeAdmin($permissao = 1){
         $this->layout = 'admin';
         
-        $this->redirecionaSeNaoTiverPermissao(1);
+        //$this->redirecionaSeNaoTiverPermissao(1);
         
         $this->set( 'all_pages_menus' , $this->Menus->MenuEsquerdaADMIN());
         $this->set( 'current_page' , $this->subPages($this->request->params['controller']));
