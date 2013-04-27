@@ -2,12 +2,14 @@
 /**************************************
  *  THEME SUPORT
  **************************************/
-
 function add_suport_theme(){
     add_theme_support('menus');
     add_theme_support( 'post-thumbnails' );
 }
 add_action('after_setup_theme','add_suport_theme');
+/**************************************
+ *  END! THEME SUPORT
+ **************************************/
 
 
 
@@ -19,13 +21,29 @@ add_action('after_setup_theme','add_suport_theme');
 
 
 /**************************************
- * Carregar JS
+ * CARREGAR JS
  **************************************/
 function load_my_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/functions.js',array('jquery'));
+    wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/global_functions.js',array('jquery'));
 }
-add_action( 'wp_enqueue_scripts', 'load_my_scripts' );
+
+add_action( 'wp_enqueue_scripts', 'load_my_scripts');
+
+//JS no Admin
+function load_my_scripts_admin() {
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/admin_functions.js',array('jquery'));
+    wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/global_functions.js',array('jquery'));
+}
+add_filter('admin_head', 'load_my_scripts');
+/**************************************
+ * END! CARREGAR JS
+ **************************************/
+
+
+
 
 
 
@@ -41,9 +59,8 @@ function add_post_types(){
     $labels = array(
         'singular_name' =>  __('Autor'),
         'name' => __('Autores'),
-        'new_item' => __('Autor'),
-        
-        
+        'add_new_item' => __('Adicionar novo Autor'),
+        'edit_item' => __('Editar Autor'),
     );
     $args = array(
         'labels' => $labels,
@@ -63,8 +80,8 @@ function add_post_types(){
     $labels = array(
         'singular_name' =>  __('Serie'),
         'name' => __('Series'),
-        
-        
+        'add_new_item' => __('Adicionar nova Serie'),
+        'edit_item' => __('Editar Serie'),
     );
     $args = array(
         'labels' => $labels,
@@ -84,8 +101,8 @@ function add_post_types(){
     $labels = array(
         'singular_name' =>  __('Material'),
         'name' => __('Materiais'),
-        
-        
+        'add_new_item' => __('Adicionar novo Material'),
+        'edit_item' => __('Editar Material'),
     );
     $args = array(
         'labels' => $labels,
@@ -106,8 +123,8 @@ function add_post_types(){
     $labels = array(
         'singular_name' =>  __('Ocorrência'),
         'name' => __('Ocorrências'),
-        
-        
+        'add_new_item' => __('Adicionar nova Ocorrência'),
+        'edit_item' => __('Editar Ocorrência'),
     );
     $args = array(
         'labels' => $labels,
@@ -123,12 +140,87 @@ function add_post_types(){
      ***********************/
     
     
+    /************************
+     * Servidores
+     ***********************/
+    $labels = array(
+        'singular_name' =>  __('Servidor'),
+        'name' => __('Servidores'),
+        'add_new_item' => __('Adicionar novo Servidor'),
+        'edit_item' => __('Editar Servidor'),
+    );
+    $args = array(
+        'labels' => $labels,
+        'description' => __('Esse post type, é para cadastrarmos as servidores onde estarão hospedados uma determinada ocorrência'),
+        'public' => true,
+        'capability_type' => 'post',
+        'has_archive' => false,
+        'supports' => array('title'),
+    );
+    register_post_type('servidores',$args);
+    /************************
+     * END! Servidores
+     ***********************/
+    
 }
 add_action( 'init', 'add_post_types' );
 /**************************************
  *      END! REGISTRO DE POST TYPE
  **************************************/
 
+
+/**************************************
+ *      COLUNAS ADICIONAIS
+ **************************************/
+    function post_column_views($colunas){
+        switch (get_post_type()){
+            case 'materiais':
+                $tmp = array_pop($colunas);
+                $colunas['multimidia'] = __("Multimidia");
+                $colunas['date'] = __('Date');
+            break;
+            case 'ocorrencias':
+                $tmp = array_pop($colunas);
+                $colunas['material'] = __("Material");
+                $colunas['multimidia_ocorrencia'] = __("Multimidia");
+                $colunas['date'] = __('Date');
+            break;
+        }
+        return $colunas;
+    }
+ 
+    //Function that Populates the 'Views' Column with the number of views count.
+    function post_custom_column_views($coluna, $post_id){
+        global $post;
+        switch ($coluna){
+            case 'multimidia':
+                $multimidias = $terms = get_the_terms($post_id,'multimidias'); 
+                foreach($multimidias as $multimidia){
+                    $echo[] = $multimidia->name;
+                }
+                echo implode(', ', $echo);
+            break;
+            case 'material':
+                $connected = p2p_type( 'material_ocorrencia' )->get_connected( $post );
+                while ( $connected->have_posts() ){
+                    $connected->the_post();
+                    the_title();
+                }
+            break;
+            case 'multimidia_ocorrencia':
+                $multimidias = get_the_terms($post->ID,'multimidias');
+                foreach($multimidias as $multimidia){
+                    $echo[] = $multimidia->name;
+                }
+                echo implode(', ', $echo);
+            break;
+        }
+    }
+    add_filter('manage_posts_columns', 'post_column_views');
+    add_action('manage_posts_custom_column', 'post_custom_column_views',10,2);
+/**************************************
+ *      END! COLUNAS ADICIONAIS
+ **************************************/
 
 
 
@@ -142,6 +234,14 @@ function add_taxonomy(){
     $labels = array(
                     'name' => __( 'Fansubs' ),
                     'singular_name' => __( 'Fansub'),
+                    'all_items' => __('Todas Fansubs'),
+                    'edit_item' => __('Editar Fansub'),
+                    'add_new_item' => __('Adicionar nova Fansub'),
+                    'separate_items_with_commas' => __('Separe as Fansubs com virgulas'),
+                    'add_or_remove_items'=> __('Adicionar ou remover Fansubs'),
+                    'menu_name' => __('Fansub'),
+                    'choose_from_most_used' => __('Escolha as fansubs mais usadas'),
+                    'not_found' => __('Fansub não encontrada'),
                 ); 
 
     register_taxonomy(
@@ -206,6 +306,7 @@ function add_taxonomy(){
                 array('series','materiais'),
                 array(
                     'labels' => $labels,
+                    'hierarchical' => true
                     )
             );
     /************************
@@ -228,10 +329,10 @@ function add_taxonomy(){
                     )
             );
     /************************
-     * END! Temas
+     * END! Formatos
      ***********************/
     
-    
+
 }
 add_action( 'init', 'add_taxonomy' );
 /**************************************
@@ -260,7 +361,7 @@ function my_connection_types() {
      * END! Autor/Serie 
      ************************/
 
-    /***********
+    /************************
      * Serie/Anime 
      ************************/
     p2p_register_connection_type(
@@ -268,8 +369,13 @@ function my_connection_types() {
                                         'name' => 'serie_material',
                                         'from' => 'series',
                                         'to' => 'materiais',
+                                        'sortable' => 'from',
                                         'title' => __('Materiais relacionados'),
-                                        'cardinality' => 'one-to-many',
+                                        'cardinality' => 'one-to-many',                                    
+                                        'admin_column' => 'to',
+                                        'to_labels' => array(
+                                                            'column_title' => 'Serie',
+                                                          ),               
                                     )
                                 );
     /************************
@@ -287,7 +393,12 @@ function my_connection_types() {
                                         'from' => 'materiais',
                                         'to' => 'ocorrencias',
                                         'cardinality' => 'one-to-many',
+                                        'sortable' => 'numero',
                                         'fields' => array(
+//                                                    'ordem' => array(
+//                                                            'title' => 'Ordem',
+//                                                            'type' => 'text',
+//                                                            ),
                                                     'numero' => array(
                                                             'title' => 'Número',
                                                             'type' => 'text',
@@ -302,35 +413,37 @@ function my_connection_types() {
     
     
     /************************
-     * Anime/Episódio 
+     * Episódio/Servidor 
      ************************/
     p2p_register_connection_type(
                                 array(
-                                        'name' => 'material_ocorrencia',
-                                        'from' => 'materiais',
-                                        'to' => 'ocorrencias',
-                                        'cardinality' => 'one-to-many',
+                                        'name' => 'episodio_servidor',
+                                        'title' => __('Links'),
+                                        'from' => 'ocorrencias',
+                                        'to' => 'servidores',
+                                        'cardinality' => 'many-to-many',
+                                        'duplicate_connections' => true,
                                         'fields' => array(
-                                                    'numero' => array(
-                                                            'title' => 'Número',
+                                                    'formato' => array(
+                                                            'title' => 'Formato',
+                                                            'type' => 'select',
+                                                            'values' => get_formatos_suportados_ocorrencia(),
+                                                            ),
+                                                    'link' => array(
+                                                            'title' => 'Link',
                                                             'type' => 'text',
+                                                            ),
+                                                    'online' => array(
+                                                            'title' => 'On',
+                                                            'type' => 'checkbox',
                                                             ),
                                                     ),
                                     )
                                 );
     /************************
      * END! Anime/Episódio 
-     ************************/
-    
-    
-    
-    
-    
-        
-        
-        
+     ************************/       
 }
-
 add_action( 'p2p_init', 'my_connection_types' );
 /**************************************
  *      END! REGISTRO DE LIGAÇÕES
@@ -339,4 +452,26 @@ add_action( 'p2p_init', 'my_connection_types' );
 
 
 
+/**************************************
+ *      FUNÇÕES AUXILIARES
+ **************************************/
+
+/*
+ * Essa Função é para retornar a lista de formatos suportados de uma ocorrencia
+ */
+function get_formatos_suportados_ocorrencia($ocorrencia_id = NULL){
+    if($ocorrencia_id==NULL){
+        //Retorna todos os formatos
+        $formatos = get_terms('formatos',array('hide_empty'=>FALSE));
+        $termos = array();
+        foreach ($formatos as $formato) {
+            $termos[$formato->slug] = $formato->name; 
+        }
+        return $termos;
+    }
+}
+
+/**************************************
+ *      END! FUNÇÕES AUXILIARES
+ **************************************/
 ?>
