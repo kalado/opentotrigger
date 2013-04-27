@@ -71,4 +71,9 @@ table {
 ! END RESET CSS
 **************/
 
-
+.bg-rosa{
+    background: url('img/bg.jpg');
+}
+.bg-dark{
+    background: url('img/bg-dark.jpg');
+}

@@ -26,7 +26,8 @@ add_action('after_setup_theme','add_suport_theme');
 function load_my_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/functions.js',array('jquery'));
-    wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/global_functions.js',array('jquery'));
+    wp_enqueue_script('functions_global',get_bloginfo('stylesheet_directory','raw').'/js/global_functions.js',array('jquery'));
+    wp_enqueue_script('bootstrap',get_bloginfo('stylesheet_directory','raw').'/js/bootstrap.js',array('jquery'));
 }
 
 add_action( 'wp_enqueue_scripts', 'load_my_scripts');
@@ -35,7 +36,7 @@ add_action( 'wp_enqueue_scripts', 'load_my_scripts');
 function load_my_scripts_admin() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/admin_functions.js',array('jquery'));
-    wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/global_functions.js',array('jquery'));
+    wp_enqueue_script('functions_global',get_bloginfo('stylesheet_directory','raw').'/js/global_functions.js',array('jquery'));
 }
 add_filter('admin_head', 'load_my_scripts');
 /**************************************
@@ -43,7 +44,24 @@ add_filter('admin_head', 'load_my_scripts');
  **************************************/
 
 
+/**************************************
+ * CARREGAR CSS
+ **************************************/
+function load_my_CSS() {
+    wp_enqueue_style( 
+            'bootstrap',
+            get_template_directory_uri().'/css/bootstrap.css'
+            );
+}
+add_action( 'wp_enqueue_scripts', 'load_my_CSS' );
 
+//JS no Admin
+function load_my_CSS_admin() {
+}
+add_filter('admin_head', 'load_my_CSS_admin');
+/**************************************
+ * END! CARREGAR JS
+ **************************************/
 
 
 
@@ -181,8 +199,8 @@ add_action( 'init', 'add_post_types' );
             break;
             case 'ocorrencias':
                 $tmp = array_pop($colunas);
-                $colunas['material'] = __("Material");
                 $colunas['multimidia_ocorrencia'] = __("Multimidia");
+                var_dump($colunas);
                 $colunas['date'] = __('Date');
             break;
         }
@@ -200,17 +218,14 @@ add_action( 'init', 'add_post_types' );
                 }
                 echo implode(', ', $echo);
             break;
-            case 'material':
-                $connected = p2p_type( 'material_ocorrencia' )->get_connected( $post );
-                while ( $connected->have_posts() ){
-                    $connected->the_post();
-                    the_title();
-                }
-            break;
             case 'multimidia_ocorrencia':
-                $multimidias = get_the_terms($post->ID,'multimidias');
-                foreach($multimidias as $multimidia){
-                    $echo[] = $multimidia->name;
+                $connected = p2p_type( 'material_ocorrencia' )->get_connected( $post );
+                    while ( $connected->have_posts() ){
+                        $connected->the_post();
+                        $multimidias = get_the_terms($post->ID,'multimidias');
+                        foreach($multimidias as $multimidia){
+                            $echo[] = $multimidia->name;
+                        }
                 }
                 echo implode(', ', $echo);
             break;
@@ -370,7 +385,7 @@ function my_connection_types() {
                                         'from' => 'series',
                                         'to' => 'materiais',
                                         'sortable' => 'from',
-                                        'title' => __('Materiais relacionados'),
+                                        'title' => __('Serie'),
                                         'cardinality' => 'one-to-many',                                    
                                         'admin_column' => 'to',
                                         'to_labels' => array(
@@ -395,15 +410,16 @@ function my_connection_types() {
                                         'cardinality' => 'one-to-many',
                                         'sortable' => 'numero',
                                         'fields' => array(
-//                                                    'ordem' => array(
-//                                                            'title' => 'Ordem',
-//                                                            'type' => 'text',
-//                                                            ),
                                                     'numero' => array(
                                                             'title' => 'Número',
                                                             'type' => 'text',
                                                             ),
                                                     ),
+                                        'admin_column' => 'to',
+                                        'to_labels' => array(
+                                                            'column_title' => 'Meterial',
+                                                          ),               
+
                                     )
                                 );
     /************************
@@ -422,6 +438,7 @@ function my_connection_types() {
                                         'from' => 'ocorrencias',
                                         'to' => 'servidores',
                                         'cardinality' => 'many-to-many',
+                                        'admin_box' => 'from',
                                         'duplicate_connections' => true,
                                         'fields' => array(
                                                     'formato' => array(
@@ -441,7 +458,7 @@ function my_connection_types() {
                                     )
                                 );
     /************************
-     * END! Anime/Episódio 
+     * END! Episódio/Servidor
      ************************/       
 }
 add_action( 'p2p_init', 'my_connection_types' );
