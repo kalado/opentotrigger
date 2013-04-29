@@ -71,9 +71,229 @@ table {
 ! END RESET CSS
 **************/
 
+
+
+a{
+    cursor: pointer;
+    text-decoration: none!important;
+}
+
+
+/**************************
+*       ATALHOS DE CSS
+***************************/
+.warp{
+    /* Centraliza o elemento*/
+}
+/**************************
+*       END.ATALHOS DE CSS
+***************************/
+
+
+
+/*********
+Cores
+
+Preto: 000000   #000000;
+
+
+*********/
+
+
+
+
+/******************************************************************
+/
+/               Basicos muito usados
+/
+/
+/               CSS básico que é muito repetido
+/
+/******************************************************************/
+.overflow-hidden{
+    overflow: hidden;
+}
+.hidden{
+    display: none;
+}
+
+.block{
+    display: block;
+}
+.inline-block{
+    display: inline-block;
+}
+/******************************************************************
+/
+/               END.Basicos muito usados
+/
+/******************************************************************/
+
+
+
+
+
+/******************************************************************
+/
+/               Cores de fonte
+/
+/           Cores de fontes
+/
+/
+/******************************************************************/
+.fonte-preto{
+    color: #000000;
+}
+/******************************************************************
+/
+/               END.Cores de fonte
+/
+/******************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************************
+/
+/               Imagens Sprite
+/
+/
+/               Os elementos de sprite são classes usadas com o sprite
+/               (Todas elas tem um atalho de JS que adiciona o Sprite e o block)
+/
+/******************************************************************/
+.sprite{
+    background: url('img/Sprite.png');    
+}
+
+.logo{
+    background-position: 0px 0px;
+    width: 367px;
+    height: 129px;
+}
+.bnt-social{
+    width: 46px;
+    height: 45px;
+}
+.bnt-youtube{
+    background-position: -39px -132px;
+}
+.bnt-facebook{
+    background-position: -85px -132px;
+}
+.bnt-twitter{
+    background-position: -131px -132px;
+}
+
+.seta{
+    width: 22px;
+    height: 22px;
+    background-position: 0px -132px;
+}
+/******************************************************************
+/
+/               END!    Imagens Sprite
+/
+/******************************************************************/
+
+
+
+
+
+
+
+
+
+
+/******************************************************************
+/
+/               Background
+/
+/               São opçoes de backgrounds para serem repetidos
+/
+/******************************************************************/
 .bg-rosa{
     background: url('img/bg.jpg');
 }
 .bg-dark{
-    background: url('img/bg-dark.jpg');
+    background: url('img/bg-dark.png');
 }
+/******************************************************************
+/
+/               END!    Background
+/
+/******************************************************************/
+
+
+
+
+/******************************************************************
+/
+/               Margens
+/
+/******************************************************************/
+/*
+*   TOP
+*/
+
+.margin-top-40{
+    margin-top: 40px;
+}
+
+
+
+/******************************************************************
+/
+/               END!    Margens
+/
+/******************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************************
+/
+/               Elementos Unicos
+/
+/
+/           Os elementos únicos são classes que não devem ser repetidas
+/
+/******************************************************************/
+.bg-mascara{
+    background: url('img/bg-mascara.png');
+    background-size: cover;
+}
+.header{
+    /*Atalho para margin-top adequado*/
+}
+
+.link-menu-top{
+    position: relative;
+    top: -4px;
+    font-size: 21px;
+}
+.footer{
+    height: 460px;
+    display: block;
+    background: url('img/footer-menor.png');
+}
+/******************************************************************
+/
+/               Imagens Sprite
+/
+/******************************************************************/
+

@@ -1,0 +1,59 @@
+/* 
+    Document   : blog
+    Created on : 22/03/2013, 17:34:12
+    Author     : Bruno
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.bx-wrapper .bx-prev{
+    left: -40px;
+}
+
+.bx-wrapper .bx-next{
+    right: -40px;
+}
+
+.bx-wrapper .bx-next:hover{
+    background-position: 0px 0px;
+}
+.bx-wrapper .bx-controls-direction a{
+    background: url(../images/seta.png);
+    margin-top: 0px;
+    top: 127px;
+    width: 34px;
+    height: 92px;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=35)";
+    filter: alpha(opacity=35);
+    -moz-opacity:0.35;
+    -khtml-opacity: 0.35;
+    opacity: 0.35;
+
+}
+.bx-wrapper .bx-controls-direction a:hover{
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+}
+
+.bx-wrapper .bx-controls-direction a.bx-prev{
+    transform:rotate(180deg);
+    -ms-transform:rotate(180deg); /* IE 9 */
+    -moz-transform:rotate(180deg); /* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+    -o-transform:rotate(180deg); /* Opera */
+}
+.bx-wrapper .bx-viewport{
+    -webkit-box-shadow: 0px 0px 0px;
+    box-shadow: 0px 0px 0px;
+    border: solid transparent 5px;
+    left: -5px;
+    background: transparent;
+}
+.slider-container img{
+    margin: 0 auto;
+}
+
+

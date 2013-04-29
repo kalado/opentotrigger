@@ -13,6 +13,17 @@ add_action('after_setup_theme','add_suport_theme');
 
 
 
+
+/**************************************
+ *      REGISTRO DE MENUS
+ **************************************/
+register_nav_menu( 'main-menu', __('Main Menu') );
+/**************************************
+ *      END! REGISTRO DE MENUS
+ **************************************/
+
+
+
 /**************************************
  *      TAMANHOS DE IMAGENS
  **************************************/
@@ -52,6 +63,13 @@ function load_my_CSS() {
             'bootstrap',
             get_template_directory_uri().'/css/bootstrap.css'
             );
+    /*
+    wp_enqueue_style( 
+            'bootstrap-responsive',
+            get_template_directory_uri().'/css/bootstrap-responsive.css',
+            array('bootstrap')
+            );
+     */
 }
 add_action( 'wp_enqueue_scripts', 'load_my_CSS' );
 
@@ -107,6 +125,7 @@ function add_post_types(){
         'public' => true,
         'capability_type' => 'post',
         'supports' => array('title','editor','thumbnail'),
+        'show_in_nav_menus' => true,
     ); 
     register_post_type('series',$args);
     /************************
