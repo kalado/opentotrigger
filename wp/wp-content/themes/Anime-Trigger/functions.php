@@ -18,6 +18,7 @@ add_action('after_setup_theme','add_suport_theme');
  *      REGISTRO DE MENUS
  **************************************/
 register_nav_menu( 'main-menu', __('Main Menu') );
+register_nav_menu( 'redes-sociais', __('Redes Sociais') );
 /**************************************
  *      END! REGISTRO DE MENUS
  **************************************/
@@ -27,7 +28,8 @@ register_nav_menu( 'main-menu', __('Main Menu') );
 /**************************************
  *      TAMANHOS DE IMAGENS
  **************************************/
-//add_image_size( 'image-contato', 221, 606 , true );
+add_image_size( 'page-serie', 260 , 341 , true );
+add_image_size( 'page-serie', null , 200 , true );
 
 
 
@@ -507,7 +509,112 @@ function get_formatos_suportados_ocorrencia($ocorrencia_id = NULL){
     }
 }
 
+/*
+ * Leia mais ...
+ */
+function new_excerpt_more( $excerpt ) {
+	return str_replace( '[...]', '...', $excerpt );
+}
+add_filter( 'wp_trim_excerpt', 'new_excerpt_more' );
+
+
 /**************************************
  *      END! FUNÇÕES AUXILIARES
  **************************************/
+
+
+
+
+
+
+/**************************************
+ *      Usuarios Personalizados
+ **************************************/
+
+
+add_action( 'show_user_profile', 'my_show_extra_profile_fields' );
+add_action( 'edit_user_profile', 'my_show_extra_profile_fields' );
+ 
+function my_show_extra_profile_fields( $user ) { ?>
+ 
+    <h3>Você nas redes sociais</h3>
+ 
+    <table class="form-table">
+ 
+        <tr>
+            <th><label for="twitter">Twitter</label></th>
+ 
+            <td>
+                <input type="text" name="twitter" id="twitteruser" value="<?php echo esc_attr( get_the_author_meta( 'twitteruser', $user->ID ) ); ?>" class="regular-text" /><br />
+                <span class="description">O seu nome de usuário do Twitter</span>
+            </td>
+        </tr>
+ 
+        <tr>
+            <th><label for="facebookuser">Facebook</label></th>
+ 
+            <td>
+                <input type="text" name="facebook" id="facebookuser" value="<?php echo esc_attr( get_the_author_meta( 'facebookuser', $user->ID ) ); ?>" class="regular-text" /><br />
+                <span class="description">O seu perfil no Facebook (URL)</span>
+            </td>
+        </tr>    
+ 
+    </table>
+ 
+    <h3>Mais sobre si</h3>
+ 
+    <table class="form-table">
+ 
+        <tr>
+            <th><label for="pais">País</label></th>
+ 
+            <td>
+                <input type="text" name="pais" id="pais" value="<?php echo esc_attr( get_the_author_meta( 'pais', $user->ID ) ); ?>" class="regular-text" /><br />
+                <span class="description">O seu país</span>
+            </td>
+        </tr>
+ 
+        <tr>
+            <th><label for="cidade">Cidade</label></th>
+ 
+            <td>
+                <input type="text" name="cidade" id="cidade" value="<?php echo esc_attr( get_the_author_meta( 'cidade', $user->ID ) ); ?>" class="regular-text" /><br />
+                <span class="description">Cidade onde se encontra</span>
+            </td>
+        </tr>    
+ 
+    </table>
+<?php }
+
+//Salvando os dados
+add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
+add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' ); 
+function my_save_extra_profile_fields( $user_id ) {
+    if ( !current_user_can( 'edit_user', $user_id ) )
+        return false;
+    update_usermeta( $user_id, 'twitteruser', $_POST['twitter'] );
+    update_usermeta( $user_id, 'facebookuser', $_POST['facebook'] );
+    update_usermeta( $user_id, 'cidade', $_POST['cidade'] );
+    update_usermeta( $user_id, 'pais', $_POST['pais'] );
+}
+
+/*
+ COMO USAR OS CAMPOS
+<?php if ( $curauth->facebookuser ) { ?>
+<a href="http://www.facebook.com/<?php echo $curauth->facebookuser; ?>" target="_blank"><div class="facebookb">facebook</div></a>
+<?php } ?>
+<?php if ( $curauth->twitteruser ) { ?>
+<a href="http://www.twitter.com/<?php echo $curauth->twitteruser; ?>" target="_blank"><div class="twitterb">twitter</div></a>
+<?php } ?>
+ */
+
+
+
+/**************************************
+ *      END! Usuarios Personalizados
+ **************************************/
+
+
+
+
 ?>

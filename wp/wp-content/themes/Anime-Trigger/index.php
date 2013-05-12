@@ -3,9 +3,14 @@
             
             <!-- corpo -->
             <div class="row-fluid corpo">
-                <div class="span6">
-<!--                    <a class="logo"></a>-->
-                </div>
+                    <?php if(have_posts()){ ?>
+                        <?php while(have_posts()){ ?>
+                            <?php the_post(); ?>
+                            <div class="span12">
+                                <h1><?php the_title(); ?></h1>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
             </div>
             <!-- end. -->
             

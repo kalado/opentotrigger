@@ -9,6 +9,8 @@ jQuery(document).ready(function(){
      ***********************************************/
     jQuery(window).resize();
     jQuery('body').addClass('bg-rosa');
+    
+    
     /***********************************************
      * END. Adicionar CSS básico
      ***********************************************/
@@ -27,6 +29,10 @@ jQuery(document).ready(function(){
     
     jQuery('.link-menu-top').addClass('fonte-preto');
     
+    
+    jQuery('#menu-redes-sociais .youtube a').addClass('bnt-youtube');
+    jQuery('#menu-redes-sociais .facebook a').addClass('bnt-facebook');
+    jQuery('#menu-redes-sociais .twitter a').addClass('bnt-twitter');
     
 
 

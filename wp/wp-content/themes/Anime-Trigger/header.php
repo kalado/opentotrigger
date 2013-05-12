@@ -24,12 +24,16 @@
                         <!-- header -->
                         <div class="row-fluid header">
                             <div class="span6">
-                                <a class="logo" href="<?php echo home_url(); ?>"></a>
+                                <a class="logo" href="<?php echo home_url(); ?>"><span class="hidden">home</span></a>
                             </div>
                             
                             <!-- rede-social -->
                             <div class="offset4 span2">
-                                <div class="row-fluid">
+
+                                
+                                
+                                <!-- exemplo de menu -->
+<!--                                <div class="row-fluid">
                                     <div class="span4">
                                         <a class="bnt-youtube"></a>                                        
                                     </div>
@@ -39,7 +43,11 @@
                                     <div class="span4">
                                         <a class="bnt-twitter"></a>
                                     </div>
-                                </div>
+                                </div>-->
+                                <!-- end.exemplo de menu -->
+                                
+                                
+                                <?php wp_nav_menu(array('menu'=>'redes-sociais','container'=>'','menu_class'=>'row-fluid' , 'link_before'=>'<span class="hidden">' ,'link_after'=>'</span>')); ?>
                             </div>
                             <!-- end.rede-social -->
                             
