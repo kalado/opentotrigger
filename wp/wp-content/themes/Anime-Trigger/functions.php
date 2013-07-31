@@ -51,7 +51,7 @@ function load_my_scripts_admin() {
     wp_enqueue_script('functions',get_bloginfo('stylesheet_directory','raw').'/js/admin_functions.js',array('jquery'));
     wp_enqueue_script('functions_global',get_bloginfo('stylesheet_directory','raw').'/js/global_functions.js',array('jquery'));
 }
-add_filter('admin_head', 'load_my_scripts');
+add_filter('admin_head', 'load_my_scripts_admin');
 /**************************************
  * END! CARREGAR JS
  **************************************/
